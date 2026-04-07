@@ -1,11 +1,407 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>No me extrañes mucho</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Interactiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #333;
+            padding: 0;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        nav a:hover {
+            background: #667eea;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .media-container {
+            background: #f4f4f4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        audio, video {
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .output {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            min-height: 40px;
+            border-left: 4px solid #667eea;
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            background: #667eea;
+            margin: 15px 0;
+            transition: all 0.3s;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .gallery-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hola </h1>
-    <p>Esta es mi primera pagina web.</p>
-    <p>Esta es mi primera pagina web.</p>
+    <div class="container">
+        <header>
+            <h1>¡Bienvenido a Mi Página Interactiva!</h1>
+            <p>Una página web moderna y funcional</p>
+        </header>
+
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#multimedia">Multimedia</a>
+            <a href="#interactivo">Interactivo</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="content">
+            <!-- Sección de Inicio -->
+            <section id="inicio">
+                <h2>📌 Inicio</h2>
+                <p>Esta es una página web completamente interactiva con multimedia, efectos visuales y funcionalidades JavaScript. Aquí puedes encuentra audio, video y elementos interactivos que harán tu experiencia más divertida.</p>
+            </section>
+
+            <!-- Sección de Multimedia -->
+            <section id="multimedia">
+                <h2>🎬 Multimedia</h2>
+                
+                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Audio:</h3>
+                <div class="media-container">
+                    <p>Escucha este ejemplo de audio:</p>
+                    <audio controls>
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                        Tu navegador no soporta el reproductor de audio.
+                    </audio>
+                </div>
+
+                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Video:</h3>
+                <div class="media-container">
+                    <p>Mira este video de ejemplo:</p>
+                    <video controls poster="https://via.placeholder.com/500x300">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        Tu navegador no soporta el reproductor de video.
+                    </video>
+                </div>
+            </section>
+
+            <!-- Sección Interactiva -->
+            <section id="interactivo">
+                <h2>🎮 Zona Interactiva</h2>
+
+                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Botones Interactivos:</h3>
+                <div class="button-group">
+                    <button onclick="saludar()">👋 Saludar</button>
+                    <button onclick="cambiarColor()">🎨 Cambiar Color</button>
+                    <button onclick="mostrarFecha()">📅 Mostrar Fecha</button>
+                    <button onclick="contarClicks()">📊 Contar Clics</button>
+                </div>
+                <div class="output" id="output">Haz clic en los botones para ver las cosas suceder...</div>
+
+                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Galería Interactiva:</h3>
+                <div class="gallery">
+                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 1')">Imagen 1</div>
+                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 2')">Imagen 2</div>
+                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 3')">Imagen 3</div>
+                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 4')">Imagen 4</div>
+                </div>
+
+                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Cuadro de Color Dinámico:</h3>
+                <div class="color-box" id="colorBox" onclick="colorAleatorio()" title="Haz clic para cambiar de color"></div>
+                <p><small>Haz clic en la caja para cambiar su color</small></p>
+
+                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Calculadora Simple:</h3>
+                <div class="form-group">
+                    <label>Número 1:</label>
+                    <input type="number" id="num1" placeholder="Ingresa un número">
+                </div>
+                <div class="form-group">
+                    <label>Número 2:</label>
+                    <input type="number" id="num2" placeholder="Ingresa otro número">
+                </div>
+                <div class="button-group">
+                    <button onclick="sumar()">➕ Sumar</button>
+                    <button onclick="restar()">➖ Restar</button>
+                    <button onclick="multiplicar()">✖️ Multiplicar</button>
+                    <button onclick="dividir()">➗ Dividir</button>
+                </div>
+                <div class="output" id="resultOutput">El resultado aparecerá aquí</div>
+            </section>
+
+            <!-- Sección de Contacto -->
+            <section id="contacto">
+                <h2>📧 Contacto</h2>
+                <form onsubmit="enviarFormulario(event)">
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" id="nombre" placeholder="Tu nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="email" placeholder="Tu email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje:</label>
+                        <textarea id="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
+                    </div>
+                    <button type="submit">📤 Enviar Mensaje</button>
+                </form>
+                <div class="output" id="formOutput"></div>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 - Mi Página Interactiva. Hecha con ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        let clickCount = 0;
+
+        function saludar() {
+            const saludo = '¡Hola! Bienvenido a mi página interactiva 👋';
+            document.getElementById('output').textContent = saludo;
+        }
+
+        function cambiarColor() {
+            const colores = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];
+            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+            document.body.style.background = `linear-gradient(135deg, ${colorAleatorio} 0%, ${colores[(colores.indexOf(colorAleatorio) + 1) % colores.length]} 100%)`;
+            document.getElementById('output').textContent = `Color cambiado a: ${colorAleatorio}`;
+        }
+
+        function mostrarFecha() {
+            const ahora = new Date();
+            const fecha = ahora.toLocaleString('es-ES', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('output').textContent = `Fecha y hora actual: ${fecha}`;
+        }
+
+        function contarClics() {
+            clickCount++;
+            document.getElementById('output').textContent = `Has hecho clic ${clickCount} veces`;
+        }
+
+        function mostrarMensaje(mensaje) {
+            document.getElementById('output').textContent = `¡Hiciste clic en ${mensaje}!`;
+        }
+
+        function colorAleatorio() {
+            const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE'];
+            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
+            document.getElementById('colorBox').style.background = colorAleatorio;
+        }
+
+        function sumar() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('resultOutput').textContent = `Resultado: ${num1} + ${num2} = ${num1 + num2}`;
+            } else {
+                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
+            }
+        }
+
+        function restar() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('resultOutput').textContent = `Resultado: ${num1} - ${num2} = ${num1 - num2}`;
+            } else {
+                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
+            }
+        }
+
+        function multiplicar() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                document.getElementById('resultOutput').textContent = `Resultado: ${num1} × ${num2} = ${num1 * num2}`;
+            } else {
+                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
+            }
+        }
+
+        function dividir() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (!isNaN(num1) && !isNaN(num2)) {
+                if (num2 === 0) {
+                    document.getElementById('resultOutput').textContent = 'Error: No se puede dividir entre cero';
+                } else {
+                    document.getElementById('resultOutput').textContent = `Resultado: ${num1} ÷ ${num2} = ${(num1 / num2).toFixed(2)}`;
+                }
+            } else {
+                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
+            }
+        }
+
+        function enviarFormulario(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            const output = `✅ ¡Mensaje enviado! <br>Nombre: ${nombre}<br>Email: ${email}<br>Mensaje: ${mensaje}`;
+            document.getElementById('formOutput').innerHTML = output;
+            
+            // Limpiar formulario
+            document.getElementById('nombre').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('mensaje').value = '';
+        }
+    </script>
 </body>
 </html>
