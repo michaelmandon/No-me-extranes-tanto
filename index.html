@@ -37,27 +37,26 @@
         .star {
             position: absolute;
             background: white;
-            border-radius: 0;
-            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            border-radius: 50%;
         }
 
         .star.small {
-            width: 1px;
-            height: 1px;
+            width: 1.25px;
+            height: 1.25px;
         }
 
         .star.medium {
-            width: 2px;
-            height: 2px;
-            box-shadow: 0 0 2px rgba(255,255,255,0.6);
+            width: 2.5px;
+            height: 2.5px;
+            box-shadow: 0 0 2.5px rgba(255,255,255,0.6);
         }
 
         .star.large {
-            width: 3px;
-            height: 3px;
-            box-shadow: 0 0 4.5px rgba(255,255,255,1), 
-                        0 0 8px rgba(255,255,255,0.6),
-                        0 0 12px rgba(255,255,255,0.3);
+            width: 3.75px;
+            height: 3.75px;
+            box-shadow: 0 0 5.6px rgba(255,255,255,1), 
+                        0 0 10px rgba(255,255,255,0.6),
+                        0 0 15px rgba(255,255,255,0.3);
         }
 
         .star.twinkle-slow {
@@ -294,7 +293,6 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease-in;
         }
 
@@ -515,7 +513,6 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            backdrop-filter: blur(5px);
             animation: fadeIn 0.3s ease-in;
         }
 
@@ -703,14 +700,7 @@
                     </audio>
                 </div>
 
-                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Video:</h3>
-                <div class="media-container">
-                    <p>Mira este video de ejemplo:</p>
-                    <video controls poster="https://via.placeholder.com/500x300">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                        Tu navegador no soporta el reproductor de video.
-                    </video>
-                </div>
+
             </section>
 
             <!-- Sección Interactiva -->
@@ -811,13 +801,13 @@
                 background.appendChild(star);
             }
 
-            // Crear meteoros más realistas
-            for (let i = 0; i < 5; i++) {
+            // Crear 2 meteoros: 1 naranja y 1 verde
+            for (let i = 0; i < 2; i++) {
                 const meteor = document.createElement('div');
                 meteor.className = 'meteor';
                 
-                // 2 naranjas (primeros 2), 3 verdes (últimos 3)
-                if (i >= 2) {
+                // Verde solo para el segundo meteoro
+                if (i === 1) {
                     meteor.classList.add('meteor-green');
                 }
                 
