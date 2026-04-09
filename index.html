@@ -41,6 +41,12 @@
             box-shadow: 0 0 2px 0px white;
         }
 
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+        }
+
         .star.small {
             width: 1px;
             height: 1px;
@@ -49,13 +55,13 @@
         .star.medium {
             width: 2px;
             height: 2px;
-            box-shadow: 0 0 4px 0px rgba(255,255,255,0.8);
+            box-shadow: 0 0 2px rgba(255,255,255,0.6);
         }
 
         .star.large {
             width: 3px;
             height: 3px;
-            box-shadow: 0 0 6px 0px rgba(255,255,255,0.9);
+            box-shadow: 0 0 3px rgba(255,255,255,0.7);
         }
 
         .star.twinkle-slow {
@@ -71,47 +77,18 @@
         }
 
         @keyframes twinkleSlow {
-            0%, 100% { 
-                opacity: 0.4;
-                filter: brightness(1);
-            }
-            25% { 
-                opacity: 0.7;
-                filter: brightness(1.2);
-            }
-            50% { 
-                opacity: 1;
-                filter: brightness(1.8);
-                text-shadow: 0 0 4px rgba(255,255,255,0.8);
-            }
-            75% { 
-                opacity: 0.7;
-                filter: brightness(1.2);
-            }
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
         }
 
         @keyframes twinkleFast {
-            0%, 100% { 
-                opacity: 0.3;
-                filter: brightness(1);
-            }
-            50% { 
-                opacity: 1;
-                filter: brightness(1.8);
-                text-shadow: 0 0 4px rgba(255,255,255,0.9);
-            }
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         @keyframes twinkleMedium {
-            0%, 100% { 
-                opacity: 0.5;
-                filter: brightness(1);
-            }
-            50% { 
-                opacity: 1;
-                filter: brightness(1.8);
-                text-shadow: 0 0 4px rgba(255,255,255,0.85);
-            }
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .meteor {
@@ -119,23 +96,15 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, 
-                rgba(255,255,255,0.5) 0%,
-                rgba(255,200,100,0.4) 15%,
-                rgba(255,150,50,0.3) 30%,
-                rgba(220,110,20,0.2) 50%,
-                rgba(150,70,10,0.1) 70%,
-                rgba(80,40,10,0) 100%);
-            opacity: 0.98;
-            filter: drop-shadow(0 0 35px rgba(255,220,100,1)) 
-                    drop-shadow(0 0 50px rgba(255,200,80,0.98))
-                    drop-shadow(0 0 70px rgba(255,180,60,0.95))
-                    drop-shadow(0 0 90px rgba(255,150,40,0.9))
-                    drop-shadow(0 0 120px rgba(255,120,20,0.8))
-                    drop-shadow(0 0 150px rgba(220,100,10,0.6))
-                    drop-shadow(0 0 180px rgba(200,80,0,0.4));
-            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3),
-                        inset 1px 1px 2px rgba(255,200,100,0.3);
+            background: radial-gradient(circle at 40% 40%, 
+                rgba(255,255,200,0.3) 0%,
+                rgba(255,200,100,0.2) 20%,
+                transparent 70%);
+            opacity: 0.95;
+            filter: drop-shadow(0 0 30px rgba(255,200,50,1)) 
+                    drop-shadow(0 0 60px rgba(255,150,0,0.8))
+                    drop-shadow(0 0 100px rgba(255,100,0,0.5));
+            will-change: transform;
         }
 
         /* Estela del meteoro */
@@ -153,46 +122,36 @@
         .meteor::after {
             content: '';
             position: absolute;
-            width: 200px;
-            height: 15px;
+            width: 150px;
+            height: 12px;
             top: 50%;
             right: 100%;
-            margin-top: -7.5px;
+            margin-top: -6px;
             background: linear-gradient(90deg, 
-                rgba(255,150,30,0) 0%,
-                rgba(255,100,20,0.1) 20%,
-                rgba(200,80,10,0.2) 40%,
-                rgba(150,50,0,0.3) 60%,
-                rgba(255,150,30,0.4) 100%);
-            filter: blur(3px);
+                transparent 0%,
+                rgba(255,150,30,0.1) 30%,
+                rgba(255,150,30,0.3) 100%);
+            filter: blur(2px);
             pointer-events: none;
+            will-change: opacity;
         }
 
         /* Meteoros verdes */
         .meteor.meteor-green {
-            background: radial-gradient(circle at 35% 35%, 
-                rgba(150,255,200,0.5) 0%,
-                rgba(120,255,180,0.4) 15%,
-                rgba(100,230,160,0.3) 30%,
-                rgba(80,180,140,0.2) 50%,
-                rgba(50,130,100,0.1) 70%,
-                rgba(30,80,60,0) 100%);
-            filter: drop-shadow(0 0 35px rgba(100,255,180,1)) 
-                    drop-shadow(0 0 50px rgba(100,255,170,0.98))
-                    drop-shadow(0 0 70px rgba(80,240,160,0.95))
-                    drop-shadow(0 0 90px rgba(60,220,150,0.9))
-                    drop-shadow(0 0 120px rgba(50,200,140,0.8))
-                    drop-shadow(0 0 150px rgba(40,180,130,0.6))
-                    drop-shadow(0 0 180px rgba(30,160,120,0.4));
+            background: radial-gradient(circle at 40% 40%, 
+                rgba(150,255,200,0.3) 0%,
+                rgba(100,255,150,0.2) 20%,
+                transparent 70%);
+            filter: drop-shadow(0 0 30px rgba(100,255,150,1)) 
+                    drop-shadow(0 0 60px rgba(80,200,150,0.8))
+                    drop-shadow(0 0 100px rgba(50,150,120,0.5));
         }
 
         .meteor.meteor-green::after {
             background: linear-gradient(90deg, 
-                rgba(100,255,150,0) 0%,
-                rgba(80,200,150,0.1) 20%,
-                rgba(50,150,120,0.2) 40%,
-                rgba(30,100,80,0.3) 60%,
-                rgba(100,255,150,0.4) 100%);
+                transparent 0%,
+                rgba(100,255,150,0.1) 30%,
+                rgba(100,255,150,0.3) 100%);
         }
 
         @keyframes moveMeteor {
@@ -828,8 +787,8 @@
         function crearFondoEspacio() {
             const background = document.getElementById('space-background');
             
-            // Crear estrellas con diferentes tamaños y parpadeos
-            for (let i = 0; i < 300; i++) {
+            // Crear estrellas optimizadas
+            for (let i = 0; i < 120; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
@@ -852,7 +811,7 @@
                 background.appendChild(star);
             }
 
-            // Crear meteoros más realistas
+            // Crear meteoros optimizados
             for (let i = 0; i < 15; i++) {
                 const meteor = document.createElement('div');
                 meteor.className = 'meteor';
