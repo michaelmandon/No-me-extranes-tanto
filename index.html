@@ -15,9 +15,180 @@
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
             color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #000;
             min-height: 100vh;
             padding: 20px;
+            overflow: hidden;
+        }
+
+        /* FONDO ANIMADO DE ESPACIO */
+        #space-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .asteroid {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(100,100,100,0.5));
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        @keyframes moveAsteroid {
+            0% {
+                transform: translateX(0) translateY(0) rotateZ(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh) rotateZ(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* MODAL DE AUTENTICACIÓN */
+        #auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        #auth-overlay.hide {
+            animation: fadeOut 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        .auth-modal {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 400px;
+            animation: modalSlideIn 0.6s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #auth-overlay.hide .auth-modal {
+            animation: modalSlideOut 0.8s ease-in forwards;
+        }
+
+        @keyframes modalSlideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-50px) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .auth-modal h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .auth-modal p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .auth-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-no:hover {
+            background: #d0d0d0;
+            transform: translateY(-3px);
+        }
+
+        /* CONTENEDOR PRINCIPAL - INICIALMENTE OCULTO */
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: contentFadeIn 1.2s ease-in 1s forwards;
+        }
+
+        @keyframes contentFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .container {
@@ -185,10 +356,154 @@
             padding: 20px;
             margin-top: 30px;
         }
+        /* CONTENEDOR PRINCIPAL - INICIALMENTE OCULTO */
+        .main-wrapper {
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            animation: contentFadeIn 1.2s ease-in 1s forwards;
+        }
+
+        @keyframes contentFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* MODAL DE AUTENTICACIÓN */
+        #auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        #auth-overlay.hide {
+            animation: fadeOut 1s ease-out forwards;
+            pointer-events: none;
+        }
+
+        .auth-modal {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            max-width: 450px;
+            animation: modalSlideIn 0.6s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #auth-overlay.hide .auth-modal {
+            animation: modalSlideOut 0.8s ease-in forwards;
+        }
+
+        @keyframes modalSlideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-50px) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        .auth-modal h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .auth-modal p {
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 18px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .auth-btn {
+            padding: 14px 35px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-no:hover {
+            background: #d0d0d0;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- FONDO ANIMADO DE ESPACIO -->
+    <div id="space-background"></div>
+
+    <!-- MODAL DE AUTENTICACIÓN -->
+    <div id="auth-overlay">
+        <div class="auth-modal">
+            <h1>🚀 Bienvenido</h1>
+            <p>¿Deseas acceder a la página?</p>
+            <div class="auth-buttons">
+                <button class="auth-btn btn-yes" onclick="permitirAcceso()">Sí</button>
+                <button class="auth-btn btn-no" onclick="denegarAcceso()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="main-wrapper">
+        <div class="container">
         <header>
             <h1>¡Bienvenido a Mi Página Interactiva!</h1>
             <p>Una página web moderna y funcional</p>
@@ -294,14 +609,62 @@
                 </form>
                 <div class="output" id="formOutput"></div>
             </section>
+            <footer>
+                <p>&copy; 2026 - Mi Página Interactiva. Hecha con ❤️</p>
+            </footer>
         </div>
-
-        <footer>
-            <p>&copy; 2026 - Mi Página Interactiva. Hecha con ❤️</p>
-        </footer>
     </div>
 
     <script>
+        // ========== INICIALIZACIÓN DEL FONDO ANIMADO ==========
+        function crearFondoEspacio() {
+            const background = document.getElementById('space-background');
+            
+            // Crear estrellas
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 2 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                background.appendChild(star);
+            }
+
+            // Crear asteroides
+            for (let i = 0; i < 20; i++) {
+                const asteroid = document.createElement('div');
+                asteroid.className = 'asteroid';
+                const size = Math.random() * 80 + 20;
+                asteroid.style.width = size + 'px';
+                asteroid.style.height = size + 'px';
+                asteroid.style.left = Math.random() * 100 + '%';
+                asteroid.style.top = Math.random() * 100 + '%';
+                const duration = Math.random() * 15 + 15;
+                asteroid.style.animation = `moveAsteroid ${duration}s infinite linear`;
+                asteroid.style.animationDelay = Math.random() * 5 + 's';
+                background.appendChild(asteroid);
+            }
+        }
+
+        // ========== FUNCIONES DE AUTENTICACIÓN ==========
+        function permitirAcceso() {
+            const overlay = document.getElementById('auth-overlay');
+            overlay.classList.add('hide');
+            
+            // Eliminar el overlay después de la animación
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 1000);
+        }
+
+        function denegarAcceso() {
+            alert('¡Lástima! No podrás acceder a la página. 😢');
+            // Aquí podrías redirigir a otra página
+        }
+
+        // ========== FUNCIONES INTERACTIVAS ==========
         let clickCount = 0;
 
         function saludar() {
@@ -312,7 +675,8 @@
         function cambiarColor() {
             const colores = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];
             const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-            document.body.style.background = `linear-gradient(135deg, ${colorAleatorio} 0%, ${colores[(colores.indexOf(colorAleatorio) + 1) % colores.length]} 100%)`;
+            const nextColor = colores[(colores.indexOf(colorAleatorio) + 1) % colores.length];
+            document.body.style.background = `linear-gradient(135deg, ${colorAleatorio} 0%, ${nextColor} 100%)`;
             document.getElementById('output').textContent = `Color cambiado a: ${colorAleatorio}`;
         }
 
@@ -335,7 +699,7 @@
         }
 
         function mostrarMensaje(mensaje) {
-            document.getElementById('output').textContent = `¡Hiciste clic en ${mensaje}!`;
+            document.getElementById('output').textContent = `¡Hiciste clic en ${mensaje}! 🖼️`;
         }
 
         function colorAleatorio() {
@@ -402,6 +766,9 @@
             document.getElementById('email').value = '';
             document.getElementById('mensaje').value = '';
         }
+
+        // Inicializar fondo cuando carga la página
+        window.addEventListener('load', crearFondoEspacio);
     </script>
 </body>
 </html>
