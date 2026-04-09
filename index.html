@@ -96,33 +96,58 @@
             will-change: transform;
         }
 
+        /* Estrella verde */
+        .star.falling.green {
+            box-shadow: 0 0 8.4px rgba(100,255,150,1), 
+                        0 0 15px rgba(80,255,140,0.6),
+                        0 0 22.5px rgba(60,220,130,0.3);
+        }
+
+        /* Estrella naranja */
+        .star.falling.orange {
+            box-shadow: 0 0 8.4px rgba(255,220,100,1), 
+                        0 0 15px rgba(255,200,80,0.6),
+                        0 0 22.5px rgba(255,180,60,0.3);
+        }
+
         .star.falling::after {
             content: '';
             position: absolute;
             width: 150px;
             height: 5.625px;
             top: 50%;
-            right: 100%;
+            left: 100%;
             margin-top: -2.8125px;
             background: linear-gradient(90deg, 
-                transparent 0%,
-                rgba(255,255,255,0.1) 30%,
-                rgba(255,255,255,0.3) 100%);
-            filter: blur(2px);
+                rgba(255,255,255,0.3) 0%,
+                rgba(255,255,255,0.1) 70%,
+                transparent 100%);
+            filter: blur(2px) rotateZ(180deg);
             pointer-events: none;
             will-change: opacity;
         }
 
+        .star.falling.green::after {
+            background: linear-gradient(90deg, 
+                rgba(100,255,150,0.3) 0%,
+                rgba(100,255,150,0.1) 70%,
+                transparent 100%);
+        }
+
+        .star.falling.orange::after {
+            background: linear-gradient(90deg, 
+                rgba(255,220,100,0.3) 0%,
+                rgba(255,220,100,0.1) 70%,
+                transparent 100%);
+        }
+
         @keyframes moveFallingStar {
             0% {
-                transform: translateX(0) translateY(-50px) rotateZ(-45deg);
-                opacity: 0.98;
-            }
-            50% {
+                transform: translate(0, 0) rotateZ(-45deg);
                 opacity: 0.98;
             }
             100% {
-                transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 50px)) rotateZ(-45deg);
+                transform: translate(calc(100vw), 100vh) rotateZ(-45deg);
                 opacity: 0;
             }
         }
@@ -766,8 +791,15 @@
                 const fallingStar = document.createElement('div');
                 fallingStar.className = 'star falling';
                 
-                // Caen desde la esquina superior izquierda con ángulo -45 grados
-                fallingStar.style.left = Math.random() * 20 + '%';
+                // Asignar colores: primera naranja, segunda verde
+                if (i === 0) {
+                    fallingStar.classList.add('orange');
+                } else {
+                    fallingStar.classList.add('green');
+                }
+                
+                // Posición inicial aleatoria en la mitad izquierda de la pantalla
+                fallingStar.style.left = Math.random() * 50 + '%';
                 fallingStar.style.top = '-50px';
                 const duration = Math.random() * 6.4 + 8;
                 fallingStar.style.animation = `moveFallingStar ${duration}s infinite linear`;
