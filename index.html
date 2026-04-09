@@ -18,7 +18,8 @@
             background: #000;
             min-height: 100vh;
             padding: 20px;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
 
         /* FONDO ANIMADO DE ESPACIO */
@@ -28,7 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: linear-gradient(135deg, #0a0a2e 0%, #16213e 25%, #0f3460 50%, #e94560 75%, #533483 100%);
             z-index: 1;
             overflow: hidden;
         }
@@ -45,20 +46,21 @@
             50% { opacity: 1; }
         }
 
-        .asteroid {
+        .meteor {
             position: absolute;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(100,100,100,0.5));
+            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,150,0,1), rgba(255,100,0,1), rgba(255,255,255,0));
             border-radius: 50%;
-            opacity: 0.6;
+            opacity: 0.8;
+            box-shadow: 0 0 20px 5px rgba(255,150,0,0.6);
         }
 
-        @keyframes moveAsteroid {
+        @keyframes moveMeteor {
             0% {
-                transform: translateX(0) translateY(0) rotateZ(0deg);
-                opacity: 0.6;
+                transform: translateX(-100px) translateY(-100px) rotateZ(45deg);
+                opacity: 0.8;
             }
             100% {
-                transform: translateX(100vw) translateY(100vh) rotateZ(360deg);
+                transform: translateX(100vw) translateY(100vh) rotateZ(45deg);
                 opacity: 0;
             }
         }
@@ -178,7 +180,29 @@
             transform: translateY(-3px);
         }
 
-        /* CONTENEDOR PRINCIPAL - INICIALMENTE OCULTO */
+        .auth-modal-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .auth-modal-container.active {
+            display: flex;
+        }
+
+        .auth-modal-container.hide {
+            animation: fadeOut 1s ease-out forwards;
+            pointer-events: none;
+        }
         .main-wrapper {
             position: relative;
             z-index: 2;
@@ -197,7 +221,8 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow: hidden;
+            overflow-y: auto;
+            max-height: 90vh;
         }
 
         header {
@@ -360,8 +385,14 @@
         .main-wrapper {
             position: relative;
             z-index: 2;
+            display: none;
             opacity: 0;
-            animation: contentFadeIn 1.2s ease-in 1s forwards;
+            animation: contentFadeIn 1.2s ease-in forwards;
+        }
+
+        .main-wrapper.show {
+            display: block;
+            animation: contentFadeIn 1.2s ease-in forwards;
         }
 
         @keyframes contentFadeIn {
@@ -489,14 +520,47 @@
     <!-- FONDO ANIMADO DE ESPACIO -->
     <div id="space-background"></div>
 
-    <!-- MODAL DE AUTENTICACIÓN -->
-    <div id="auth-overlay">
+    <!-- MODALES DE AUTENTICACIÓN -->
+    <div id="modal-1" class="auth-modal-container active">
         <div class="auth-modal">
-            <h1>🚀 Bienvenido</h1>
-            <p>¿Deseas acceder a la página?</p>
+            <h1>🚀 Acceso Nivel 1</h1>
+            <p>¿Deseas continuar?</p>
             <div class="auth-buttons">
-                <button class="auth-btn btn-yes" onclick="permitirAcceso()">Sí</button>
+                <button class="auth-btn btn-yes" onclick="siguienteModal(1)">Sí</button>
                 <button class="auth-btn btn-no" onclick="denegarAcceso()">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-2" class="auth-modal-container">
+        <div class="auth-modal">
+            <h1>🔐 Acceso Nivel 2</h1>
+            <p>¿Estás seguro de que quieres proceder?</p>
+            <div class="auth-buttons">
+                <button class="auth-btn btn-yes" onclick="siguienteModal(2)">Sí</button>
+                <button class="auth-btn btn-no" onclick="volverModal()">Atrás</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-3" class="auth-modal-container">
+        <div class="auth-modal">
+            <h1>⚡ Acceso Nivel 3</h1>
+            <p>¿Confirmas tu identidad?</p>
+            <div class="auth-buttons">
+                <button class="auth-btn btn-yes" onclick="siguienteModal(3)">Sí</button>
+                <button class="auth-btn btn-no" onclick="volverModal()">Atrás</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-4" class="auth-modal-container">
+        <div class="auth-modal">
+            <h1>✨ Acceso Final</h1>
+            <p>¿Listo para acceder a la página interactiva?</p>
+            <div class="auth-buttons">
+                <button class="auth-btn btn-yes" onclick="permitirAccesoFinal()">Sí, Acceder</button>
+                <button class="auth-btn btn-no" onclick="volverModal()">Atrás</button>
             </div>
         </div>
     </div>
@@ -632,36 +696,71 @@
                 background.appendChild(star);
             }
 
-            // Crear asteroides
-            for (let i = 0; i < 20; i++) {
-                const asteroid = document.createElement('div');
-                asteroid.className = 'asteroid';
-                const size = Math.random() * 80 + 20;
-                asteroid.style.width = size + 'px';
-                asteroid.style.height = size + 'px';
-                asteroid.style.left = Math.random() * 100 + '%';
-                asteroid.style.top = Math.random() * 100 + '%';
-                const duration = Math.random() * 15 + 15;
-                asteroid.style.animation = `moveAsteroid ${duration}s infinite linear`;
-                asteroid.style.animationDelay = Math.random() * 5 + 's';
-                background.appendChild(asteroid);
+            // Crear meteoros
+            for (let i = 0; i < 25; i++) {
+                const meteor = document.createElement('div');
+                meteor.className = 'meteor';
+                const size = Math.random() * 8 + 3;
+                meteor.style.width = size + 'px';
+                meteor.style.height = size * 6 + 'px';
+                meteor.style.left = Math.random() * 100 + '%';
+                meteor.style.top = Math.random() * 100 + '%';
+                const duration = Math.random() * 10 + 12;
+                meteor.style.animation = `moveMeteor ${duration}s infinite linear`;
+                meteor.style.animationDelay = Math.random() * 8 + 's';
+                background.appendChild(meteor);
             }
         }
 
-        // ========== FUNCIONES DE AUTENTICACIÓN ==========
-        function permitirAcceso() {
-            const overlay = document.getElementById('auth-overlay');
-            overlay.classList.add('hide');
+        // ========== FUNCIONES DE AUTENTICACIÓN MÚLTIPLE ==========
+        let modalActual = 1;
+
+        function siguienteModal(numeroModal) {
+            const modalActualElement = document.getElementById(`modal-${numeroModal}`);
+            modalActualElement.classList.remove('active');
+            modalActualElement.classList.add('hide');
             
-            // Eliminar el overlay después de la animación
             setTimeout(() => {
-                overlay.style.display = 'none';
+                modalActualElement.style.display = 'none';
+                modalActual = numeroModal + 1;
+                const proximoModal = document.getElementById(`modal-${modalActual}`);
+                if (proximoModal) {
+                    proximoModal.classList.add('active');
+                }
+            }, 600);
+        }
+
+        function volverModal() {
+            if (modalActual > 1) {
+                const modalActualElement = document.getElementById(`modal-${modalActual}`);
+                modalActualElement.classList.remove('active');
+                modalActualElement.classList.add('hide');
+                
+                setTimeout(() => {
+                    modalActualElement.style.display = 'none';
+                    modalActual = modalActual - 1;
+                    const modalAnterior = document.getElementById(`modal-${modalActual}`);
+                    modalAnterior.classList.remove('hide');
+                    modalAnterior.classList.add('active');
+                }, 600);
+            }
+        }
+
+        function permitirAccesoFinal() {
+            const modal4 = document.getElementById('modal-4');
+            modal4.classList.remove('active');
+            modal4.classList.add('hide');
+            
+            setTimeout(() => {
+                modal4.style.display = 'none';
+                const mainWrapper = document.querySelector('.main-wrapper');
+                mainWrapper.classList.add('show');
             }, 1000);
         }
 
         function denegarAcceso() {
             alert('¡Lástima! No podrás acceder a la página. 😢');
-            // Aquí podrías redirigir a otra página
+            location.reload();
         }
 
         // ========== FUNCIONES INTERACTIVAS ==========
