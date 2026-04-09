@@ -155,14 +155,14 @@
 
         @keyframes moveMeteor {
             0% {
-                transform: translateX(-100px) translateY(-100px) rotateZ(45deg);
+                transform: translateX(0) translateY(-50px) rotateZ(-45deg);
                 opacity: 0.98;
             }
             50% {
                 opacity: 0.98;
             }
             100% {
-                transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 100px)) rotateZ(45deg);
+                transform: translateX(calc(100vw + 100px)) translateY(calc(100vh + 50px)) rotateZ(-45deg);
                 opacity: 0;
             }
         }
@@ -811,8 +811,9 @@
                     meteor.classList.add('meteor-green');
                 }
                 
-                meteor.style.left = Math.random() * 100 + '%';
-                meteor.style.top = Math.random() * 100 + '%';
+                // Caen desde la esquina superior izquierda con ángulo -45 grados
+                meteor.style.left = Math.random() * 20 + '%';
+                meteor.style.top = '-50px';
                 const duration = Math.random() * 6.4 + 8;
                 meteor.style.animation = `moveMeteor ${duration}s infinite linear`;
                 meteor.style.animationDelay = Math.random() * 10 + 's';
