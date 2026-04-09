@@ -115,30 +115,33 @@
             position: absolute;
             width: 150px;
             height: 5.625px;
-            top: -75px;
-            left: -75px;
+            top: 50%;
+            left: 50%;
+            margin-top: -2.8125px;
+            margin-left: 0;
             background: linear-gradient(90deg, 
-                rgba(255,255,255,0.3) 0%,
-                rgba(255,255,255,0.1) 70%,
-                transparent 100%);
+                rgba(255,255,255,1) 0%,
+                rgba(255,255,255,0.6) 50%,
+                rgba(255,255,255,0) 100%);
             filter: blur(2px);
-            transform: rotate(45deg);
+            transform: rotate(135deg);
+            transform-origin: 0 50%;
             pointer-events: none;
             will-change: opacity;
         }
 
         .star.falling.green::after {
             background: linear-gradient(90deg, 
-                rgba(100,255,150,0.3) 0%,
-                rgba(100,255,150,0.1) 70%,
-                transparent 100%);
+                rgba(100,255,150,1) 0%,
+                rgba(100,255,150,0.6) 50%,
+                rgba(100,255,150,0) 100%);
         }
 
         .star.falling.orange::after {
             background: linear-gradient(90deg, 
-                rgba(255,220,100,0.3) 0%,
-                rgba(255,220,100,0.1) 70%,
-                transparent 100%);
+                rgba(255,220,100,1) 0%,
+                rgba(255,220,100,0.6) 50%,
+                rgba(255,220,100,0) 100%);
         }
 
         @keyframes moveFallingStar {
