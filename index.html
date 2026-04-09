@@ -115,14 +115,14 @@
             position: absolute;
             width: 150px;
             height: 5.625px;
-            top: 50%;
-            left: 100%;
-            margin-top: -2.8125px;
+            top: -75px;
+            left: -75px;
             background: linear-gradient(90deg, 
                 rgba(255,255,255,0.3) 0%,
                 rgba(255,255,255,0.1) 70%,
                 transparent 100%);
-            filter: blur(2px) rotateZ(180deg);
+            filter: blur(2px);
+            transform: rotate(45deg);
             pointer-events: none;
             will-change: opacity;
         }
@@ -798,8 +798,8 @@
                     fallingStar.classList.add('green');
                 }
                 
-                // Posición inicial aleatoria en la mitad izquierda de la pantalla
-                fallingStar.style.left = Math.random() * 50 + '%';
+                // Posición inicial aleatoria en la parte superior de la pantalla
+                fallingStar.style.left = Math.random() * 100 + '%';
                 fallingStar.style.top = '-50px';
                 const duration = Math.random() * 6.4 + 8;
                 fallingStar.style.animation = `moveFallingStar ${duration}s infinite linear`;
