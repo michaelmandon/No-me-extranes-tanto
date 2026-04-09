@@ -130,12 +130,11 @@
             right: 100%;
             margin-top: -7.5px;
             background: linear-gradient(90deg, 
-                rgba(255,150,30,0.4) 0%,
-                rgba(255,100,20,0.35) 15%,
-                rgba(200,80,10,0.3) 30%,
-                rgba(150,50,0,0.2) 50%,
-                rgba(100,30,0,0.1) 75%,
-                rgba(100,30,0,0) 100%);
+                rgba(255,150,30,0) 0%,
+                rgba(255,100,20,0.1) 20%,
+                rgba(200,80,10,0.2) 40%,
+                rgba(150,50,0,0.3) 60%,
+                rgba(255,150,30,0.4) 100%);
             filter: blur(3px);
             pointer-events: none;
         }
@@ -158,38 +157,11 @@
 
         .meteor.meteor-green::after {
             background: linear-gradient(90deg, 
-                rgba(100,255,150,0.4) 0%,
-                rgba(80,200,150,0.35) 15%,
-                rgba(50,150,120,0.3) 30%,
-                rgba(30,100,80,0.2) 50%,
-                rgba(20,60,50,0.1) 75%,
-                rgba(20,60,50,0) 100%);
-        }
-
-        /* Meteoros azules */
-        .meteor.meteor-blue {
-            background: radial-gradient(circle at 35% 35%, 
-                rgba(150,200,255,1) 0%,
-                rgba(150,200,255,0.95) 15%,
-                rgba(100,150,255,0.9) 30%,
-                rgba(50,120,200,0.85) 50%,
-                rgba(30,80,150,0.65) 70%,
-                rgba(20,50,100,0.3) 100%);
-            filter: drop-shadow(0 0 25px rgba(150,200,255,0.95)) 
-                    drop-shadow(0 0 40px rgba(100,150,255,0.85))
-                    drop-shadow(0 0 60px rgba(50,120,200,0.7))
-                    drop-shadow(0 0 80px rgba(30,80,150,0.5))
-                    drop-shadow(0 0 100px rgba(20,50,100,0.3));
-        }
-
-        .meteor.meteor-blue::after {
-            background: linear-gradient(90deg, 
-                rgba(150,200,255,0.4) 0%,
-                rgba(100,150,255,0.35) 15%,
-                rgba(50,120,200,0.3) 30%,
-                rgba(30,80,150,0.2) 50%,
-                rgba(20,50,100,0.1) 75%,
-                rgba(20,50,100,0) 100%);
+                rgba(100,255,150,0) 0%,
+                rgba(80,200,150,0.1) 20%,
+                rgba(50,150,120,0.2) 40%,
+                rgba(30,100,80,0.3) 60%,
+                rgba(100,255,150,0.4) 100%);
         }
 
         @keyframes moveMeteor {
@@ -854,11 +826,9 @@
                 const meteor = document.createElement('div');
                 meteor.className = 'meteor';
                 
-                // Asignar colores: 5 anaranjados, 5 verdes, 5 azules
-                if (i >= 5 && i < 10) {
+                // Asignar colores: 7 anaranjados, 8 verdes
+                if (i >= 7) {
                     meteor.classList.add('meteor-green');
-                } else if (i >= 10) {
-                    meteor.classList.add('meteor-blue');
                 }
                 
                 meteor.style.left = Math.random() * 100 + '%';
