@@ -807,9 +807,9 @@
                     fallingStar.classList.add('green');
                 }
                 
-                // Posición inicial aleatoria en la parte superior de la pantalla
-                fallingStar.style.left = Math.random() * 100 + '%';
-                fallingStar.style.top = -(Math.random() * 150 + 50) + 'px';
+                // Posición inicial: horizontal aleatoria (0-75%), vertical fija fuera de pantalla
+                fallingStar.style.left = Math.random() * 75 + '%';
+                fallingStar.style.top = '-50px';
                 const duration = Math.random() * 6.4 + 8;
                 fallingStar.style.animation = `moveFallingStar ${duration}s infinite linear`;
                 fallingStar.style.animationDelay = Math.random() * 10 + 's';
