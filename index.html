@@ -177,7 +177,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -511,7 +511,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -631,8 +631,7 @@
     <!-- MODALES DE AUTENTICACIÓN -->
     <div id="modal-1" class="auth-modal-container active">
         <div class="auth-modal">
-            <h1>🚀 Acceso Nivel 1</h1>
-            <p>¿Deseas continuar?</p>
+            <h1>Eres la mejor fisio del mundo?</h1>
             <div class="auth-buttons">
                 <button class="auth-btn btn-yes" onclick="siguienteModal(1)">Sí</button>
                 <button class="auth-btn btn-no" onclick="denegarAcceso()">No</button>
@@ -642,33 +641,30 @@
 
     <div id="modal-2" class="auth-modal-container">
         <div class="auth-modal">
-            <h1>🔐 Acceso Nivel 2</h1>
-            <p>¿Estás seguro de que quieres proceder?</p>
+            <h1>Eres la mejor patinadora del mundo?</h1>
             <div class="auth-buttons">
                 <button class="auth-btn btn-yes" onclick="siguienteModal(2)">Sí</button>
-                <button class="auth-btn btn-no" onclick="volverModal()">Atrás</button>
+                <button class="auth-btn btn-no" onclick="volverModal()">No</button>
             </div>
         </div>
     </div>
 
     <div id="modal-3" class="auth-modal-container">
         <div class="auth-modal">
-            <h1>⚡ Acceso Nivel 3</h1>
-            <p>¿Confirmas tu identidad?</p>
+            <h1>Eres la mejor hija del mundo?</h1>
             <div class="auth-buttons">
                 <button class="auth-btn btn-yes" onclick="siguienteModal(3)">Sí</button>
-                <button class="auth-btn btn-no" onclick="volverModal()">Atrás</button>
+                <button class="auth-btn btn-no" onclick="volverModal()">No</button>
             </div>
         </div>
     </div>
 
     <div id="modal-4" class="auth-modal-container">
         <div class="auth-modal">
-            <h1>✨ Acceso Final</h1>
-            <p>¿Listo para acceder a la página interactiva?</p>
+            <h1>Eres la mejor novia del mundo?</h1>
             <div class="auth-buttons">
                 <button class="auth-btn btn-yes" onclick="permitirAccesoFinal()">Sí, Acceder</button>
-                <button class="auth-btn btn-no" onclick="volverModal()">Atrás</button>
+                <button class="auth-btn btn-no" onclick="volverModal()">No</button>
             </div>
         </div>
     </div>
@@ -775,7 +771,7 @@
                 <div class="output" id="formOutput"></div>
             </section>
             <footer>
-                <p>&copy; 2026 - Mi Página Interactiva. Hecha con ❤️</p>
+                <p>&copy; 2026 - Nuestro rinconcito. Hecha con ❤️</p>
             </footer>
         </div>
     </div>
@@ -868,19 +864,21 @@
             }, 600);
         }
 
-        // Retrocede al modal anterior
+        // Retrocede al primer modal con mensaje de error
         function volverModal() {
             if (modalActual > 1) {
+                alert('¡Lástima! No podrás acceder a la página. 😢');
                 const modalActualElement = document.getElementById(`modal-${modalActual}`);
                 modalActualElement.classList.remove('active');
                 modalActualElement.classList.add('hide');
                 
                 setTimeout(() => {
                     modalActualElement.style.display = 'none';
-                    modalActual = modalActual - 1;
-                    const modalAnterior = document.getElementById(`modal-${modalActual}`);
-                    modalAnterior.classList.remove('hide');
-                    modalAnterior.classList.add('active');
+                    modalActual = 1;
+                    const primerModal = document.getElementById('modal-1');
+                    primerModal.classList.remove('hide');
+                    primerModal.style.display = '';
+                    primerModal.classList.add('active');
                 }, 600);
             }
         }
