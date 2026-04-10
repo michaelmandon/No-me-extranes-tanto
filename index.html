@@ -608,7 +608,7 @@
 </head>
 <body>
     <!-- MÚSICA DE FONDO -->
-    <audio id="background-music" autoplay loop muted>
+    <audio id="background-music" loop>
         <source src="Coldplay - Yellow (320).mp3" type="audio/mpeg">
     </audio>
 
@@ -828,6 +828,13 @@
             modalActualElement.classList.remove('active');
             modalActualElement.classList.add('hide');
             
+            // Reproducir música de fondo cuando se acepta el primer modal
+            if (numeroModal === 1) {
+                const audio = document.getElementById('background-music');
+                audio.muted = false;
+                audio.play().catch(() => {});
+            }
+            
             setTimeout(() => {
                 modalActualElement.style.display = 'none';
                 modalActual = numeroModal + 1;
@@ -981,16 +988,6 @@
         // ========== INICIALIZADOR ==========
         // Crea el fondo animado cuando la página carga
         window.addEventListener('load', crearFondoEspacio);
-
-        // ========== CONTROL DE MÚSICA DE FONDO ==========
-        // Permite reproducción sin mute después de interacción del usuario (política de navegadores)
-        document.addEventListener('click', () => {
-            const audio = document.getElementById('background-music');
-            if (audio.muted) {
-                audio.muted = false;
-                audio.play().catch(() => {});
-            }
-        }, { once: true });
     </script>
 </body>
 </html>
