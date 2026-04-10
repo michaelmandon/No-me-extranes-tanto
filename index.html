@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Interactiva</title>
     <style>
+        /* ========== RESET Y ESTILOS BASE ========== */
         * {
             margin: 0;
             padding: 0;
@@ -22,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* FONDO ANIMADO DE ESPACIO REALISTA */
+        /* ========== FONDO ANIMADO DE ESPACIO ========== */
         #space-background {
             position: fixed;
             top: 0;
@@ -71,6 +72,7 @@
             animation: twinkleMedium 3s infinite;
         }
 
+        /* ========== KEYFRAMES DE ANIMACIÓN ==========*/
         @keyframes twinkleSlow {
             0%, 100% { opacity: 0.4; }
             50% { opacity: 1; }
@@ -86,7 +88,7 @@
             50% { opacity: 1; }
         }
 
-        /* Estrellas grandes que caen */
+        /* ========== ESTRELLAS GRANDES QUE CAEN DIAGONALMENTE ========== */
         .star.falling {
             width: 5.625px;
             height: 5.625px;
@@ -762,6 +764,7 @@
 
     <script>
         // ========== INICIALIZACIÓN DEL FONDO ANIMADO ==========
+        // Crea 120 estrellas parpadeantes y 2 estrellas grandes que caen diagonalmente
         function crearFondoEspacio() {
             const background = document.getElementById('space-background');
             
@@ -814,6 +817,7 @@
         // ========== FUNCIONES DE AUTENTICACIÓN MÚLTIPLE ==========
         let modalActual = 1;
 
+        // Avanza al siguiente modal con animación de desvanecimiento
         function siguienteModal(numeroModal) {
             const modalActualElement = document.getElementById(`modal-${numeroModal}`);
             modalActualElement.classList.remove('active');
@@ -829,6 +833,7 @@
             }, 600);
         }
 
+        // Retrocede al modal anterior
         function volverModal() {
             if (modalActual > 1) {
                 const modalActualElement = document.getElementById(`modal-${modalActual}`);
@@ -845,6 +850,7 @@
             }
         }
 
+        // Aprueba el acceso y revela el contenido principal
         function permitirAccesoFinal() {
             const modal4 = document.getElementById('modal-4');
             modal4.classList.remove('active');
@@ -857,6 +863,7 @@
             }, 1000);
         }
 
+        // Deniega el acceso y recarga la página
         function denegarAcceso() {
             alert('¡Lástima! No podrás acceder a la página. 😢');
             location.reload();
@@ -864,108 +871,110 @@
 
         // ========== FUNCIONES INTERACTIVAS ==========
         let clickCount = 0;
+        const COLORES_FONDO = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];
+        const COLORES_CAJA = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE'];
 
+        // Función genérica para mostrar mensajes en output
+        function mostrarOutput(mensaje, elementId = 'output') {
+            document.getElementById(elementId).textContent = mensaje;
+        }
+
+        // Función auxiliar para obtener y validar números del formulario
+        function obtenerNumeros() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            if (isNaN(num1) || isNaN(num2)) {
+                return null;
+            }
+            return { num1, num2 };
+        }
+
+        // Saluda al usuario
         function saludar() {
-            const saludo = '¡Hola! Bienvenido a mi página interactiva 👋';
-            document.getElementById('output').textContent = saludo;
+            mostrarOutput('¡Hola! Bienvenido a mi página interactiva 👋');
         }
 
+        // Cambia el color de fondo con gradiente
         function cambiarColor() {
-            const colores = ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];
-            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-            const nextColor = colores[(colores.indexOf(colorAleatorio) + 1) % colores.length];
-            document.body.style.background = `linear-gradient(135deg, ${colorAleatorio} 0%, ${nextColor} 100%)`;
-            document.getElementById('output').textContent = `Color cambiado a: ${colorAleatorio}`;
+            const index = Math.floor(Math.random() * COLORES_FONDO.length);
+            const color1 = COLORES_FONDO[index];
+            const color2 = COLORES_FONDO[(index + 1) % COLORES_FONDO.length];
+            document.body.style.background = `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`;
+            mostrarOutput(`Color cambiado a: ${color1}`);
         }
 
+        // Muestra la fecha y hora actual formateada
         function mostrarFecha() {
-            const ahora = new Date();
-            const fecha = ahora.toLocaleString('es-ES', { 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit'
+            const fecha = new Date().toLocaleString('es-ES', { 
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
             });
-            document.getElementById('output').textContent = `Fecha y hora actual: ${fecha}`;
+            mostrarOutput(`Fecha y hora actual: ${fecha}`);
         }
 
-        function contarClics() {
-            clickCount++;
-            document.getElementById('output').textContent = `Has hecho clic ${clickCount} veces`;
+        // Incrementa y muestra el contador de clics
+        function contarClicks() {
+            mostrarOutput(`Has hecho clic ${++clickCount} veces`);
         }
 
+        // Muestra mensaje cuando se hace clic en galería
         function mostrarMensaje(mensaje) {
-            document.getElementById('output').textContent = `¡Hiciste clic en ${mensaje}! 🖼️`;
+            mostrarOutput(`¡Hiciste clic en ${mensaje}! 🖼️`);
         }
 
+        // Cambia el color de la caja dinámicamente
         function colorAleatorio() {
-            const colores = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE'];
-            const colorAleatorio = colores[Math.floor(Math.random() * colores.length)];
-            document.getElementById('colorBox').style.background = colorAleatorio;
+            const color = COLORES_CAJA[Math.floor(Math.random() * COLORES_CAJA.length)];
+            document.getElementById('colorBox').style.background = color;
         }
 
-        function sumar() {
-            const num1 = parseFloat(document.getElementById('num1').value);
-            const num2 = parseFloat(document.getElementById('num2').value);
-            if (!isNaN(num1) && !isNaN(num2)) {
-                document.getElementById('resultOutput').textContent = `Resultado: ${num1} + ${num2} = ${num1 + num2}`;
-            } else {
-                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
+        // Función genérica para operaciones matemáticas
+        function realizarOperacion(operador) {
+            const nums = obtenerNumeros();
+            if (!nums) {
+                mostrarOutput('Por favor ingresa dos números válidos', 'resultOutput');
+                return;
             }
-        }
-
-        function restar() {
-            const num1 = parseFloat(document.getElementById('num1').value);
-            const num2 = parseFloat(document.getElementById('num2').value);
-            if (!isNaN(num1) && !isNaN(num2)) {
-                document.getElementById('resultOutput').textContent = `Resultado: ${num1} - ${num2} = ${num1 - num2}`;
-            } else {
-                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
-            }
-        }
-
-        function multiplicar() {
-            const num1 = parseFloat(document.getElementById('num1').value);
-            const num2 = parseFloat(document.getElementById('num2').value);
-            if (!isNaN(num1) && !isNaN(num2)) {
-                document.getElementById('resultOutput').textContent = `Resultado: ${num1} × ${num2} = ${num1 * num2}`;
-            } else {
-                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
-            }
-        }
-
-        function dividir() {
-            const num1 = parseFloat(document.getElementById('num1').value);
-            const num2 = parseFloat(document.getElementById('num2').value);
-            if (!isNaN(num1) && !isNaN(num2)) {
-                if (num2 === 0) {
-                    document.getElementById('resultOutput').textContent = 'Error: No se puede dividir entre cero';
-                } else {
-                    document.getElementById('resultOutput').textContent = `Resultado: ${num1} ÷ ${num2} = ${(num1 / num2).toFixed(2)}`;
+            const { num1, num2 } = nums;
+            const operaciones = {
+                '+': { resultado: num1 + num2, simbolo: '+' },
+                '-': { resultado: num1 - num2, simbolo: '-' },
+                '×': { resultado: num1 * num2, simbolo: '×' },
+                '÷': { 
+                    resultado: num2 === 0 ? 'Error: División entre cero' : (num1 / num2).toFixed(2),
+                    simbolo: '÷'
                 }
-            } else {
-                document.getElementById('resultOutput').textContent = 'Por favor ingresa dos números válidos';
-            }
+            };
+            const op = operaciones[operador];
+            const mensaje = typeof op.resultado === 'number' 
+                ? `Resultado: ${num1} ${op.simbolo} ${num2} = ${op.resultado}`
+                : op.resultado;
+            mostrarOutput(mensaje, 'resultOutput');
         }
 
+        // Wrappers para cada operación matemática
+        function sumar() { realizarOperacion('+'); }
+        function restar() { realizarOperacion('-'); }
+        function multiplicar() { realizarOperacion('×'); }
+        function dividir() { realizarOperacion('÷'); }
+
+        // Procesa el envío del formulario y lo limpia
         function enviarFormulario(event) {
             event.preventDefault();
             const nombre = document.getElementById('nombre').value;
             const email = document.getElementById('email').value;
             const mensaje = document.getElementById('mensaje').value;
-            
             const output = `✅ ¡Mensaje enviado! <br>Nombre: ${nombre}<br>Email: ${email}<br>Mensaje: ${mensaje}`;
             document.getElementById('formOutput').innerHTML = output;
             
-            // Limpiar formulario
-            document.getElementById('nombre').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('mensaje').value = '';
+            // Limpiar campos del formulario
+            ['nombre', 'email', 'mensaje'].forEach(id => {
+                document.getElementById(id).value = '';
+            });
         }
 
-        // Inicializar fondo cuando carga la página
+        // ========== INICIALIZADOR ==========
+        // Crea el fondo animado cuando la página carga
         window.addEventListener('load', crearFondoEspacio);
     </script>
 </body>
