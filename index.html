@@ -607,6 +607,11 @@
     </style>
 </head>
 <body>
+    <!-- MÚSICA DE FONDO -->
+    <audio id="background-music" autoplay loop muted>
+        <source src="Coldplay - Yellow (320).mp3" type="audio/mpeg">
+    </audio>
+
     <!-- FONDO ANIMADO DE ESPACIO -->
     <div id="space-background"></div>
 
@@ -976,6 +981,16 @@
         // ========== INICIALIZADOR ==========
         // Crea el fondo animado cuando la página carga
         window.addEventListener('load', crearFondoEspacio);
+
+        // ========== CONTROL DE MÚSICA DE FONDO ==========
+        // Permite reproducción sin mute después de interacción del usuario (política de navegadores)
+        document.addEventListener('click', () => {
+            const audio = document.getElementById('background-music');
+            if (audio.muted) {
+                audio.muted = false;
+                audio.play().catch(() => {});
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
