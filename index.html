@@ -767,7 +767,7 @@
 
     <script>
         // ========== INICIALIZACIÓN DEL FONDO ANIMADO ==========
-        // Crea 120 estrellas parpadeantes y 2 estrellas grandes que caen diagonalmente
+        // Crea 120 estrellas parpadeantes y 4 estrellas grandes que caen diagonalmente
         function crearFondoEspacio() {
             const background = document.getElementById('space-background');
             
@@ -795,13 +795,13 @@
                 background.appendChild(star);
             }
 
-            // Crear 2 estrellas grandes que caen diagonalmente
-            for (let i = 0; i < 2; i++) {
+            // Crear 4 estrellas grandes que caen diagonalmente
+            for (let i = 0; i < 4; i++) {
                 const fallingStar = document.createElement('div');
                 fallingStar.className = 'star falling';
                 
-                // Asignar colores: primera naranja, segunda verde
-                if (i === 0) {
+                // Asignar colores: pares naranja, impares verde
+                if (i % 2 === 0) {
                     fallingStar.classList.add('orange');
                 } else {
                     fallingStar.classList.add('green');
