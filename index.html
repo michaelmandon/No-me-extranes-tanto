@@ -865,21 +865,11 @@
         }
 
         // Retrocede al primer modal con mensaje de error
+        // Muestra error y recarga la página (vuelve al modal 1)
         function volverModal() {
             if (modalActual > 1) {
-                alert('¡Lástima! No podrás acceder a la página. 😢');
-                const modalActualElement = document.getElementById(`modal-${modalActual}`);
-                modalActualElement.classList.remove('active');
-                modalActualElement.classList.add('hide');
-                
-                setTimeout(() => {
-                    modalActualElement.style.display = 'none';
-                    modalActual = 1;
-                    const primerModal = document.getElementById('modal-1');
-                    primerModal.classList.remove('hide');
-                    primerModal.style.display = '';
-                    primerModal.classList.add('active');
-                }, 600);
+                alert('¡Oh no! Parece que no eres valemantilla_21. 😢');
+                location.reload();
             }
         }
 
