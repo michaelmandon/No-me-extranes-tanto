@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Interactiva</title>
+    <title>No me extrañes tanto </title>
     <style>
         /* ========== RESET Y ESTILOS BASE ========== */
         * {
@@ -110,6 +110,39 @@
             box-shadow: 0 0 8.4px rgba(255,220,100,1), 
                         0 0 15px rgba(255,200,80,0.6),
                         0 0 22.5px rgba(255,180,60,0.3);
+        }
+
+        /* ========== ESTELAS DE LAS ESTRELLAS CAYENTES ========== */
+        .star.falling::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 5.625px;
+            top: 50%;
+            left: 50%;
+            margin-top: -2.8125px;
+            margin-left: 0;
+            filter: blur(2px);
+            transform: rotate(-45deg);
+            transform-origin: right center;
+            pointer-events: none;
+            will-change: opacity;
+        }
+
+        /* Estela verde: degradación del color verde de la estrella */
+        .star.falling.green::after {
+            background: linear-gradient(90deg, 
+                rgba(100,255,150,1) 0%,
+                rgba(100,255,150,0.6) 50%,
+                rgba(100,255,150,0) 100%);
+        }
+
+        /* Estela naranja: degradación del color naranja de la estrella */
+        .star.falling.orange::after {
+            background: linear-gradient(90deg, 
+                rgba(255,220,100,1) 0%,
+                rgba(255,220,100,0.6) 50%,
+                rgba(255,220,100,0) 100%);
         }
 
         @keyframes moveFallingStar {
