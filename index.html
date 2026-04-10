@@ -112,6 +112,13 @@
                         0 0 22.5px rgba(255,180,60,0.3);
         }
 
+        /* Estrella rosa */
+        .star.falling.pink {
+            box-shadow: 0 0 8.4px rgba(255,105,180,1), 
+                        0 0 15px rgba(255,80,160,0.6),
+                        0 0 22.5px rgba(255,60,140,0.3);
+        }
+
         /* ========== ESTELAS DE LAS ESTRELLAS CAYENTES ========== */
         .star.falling::after {
             content: '';
@@ -142,6 +149,14 @@
                 rgba(255,220,100,0) 0%,
                 rgba(255,220,100,0.6) 50%,
                 rgba(255,220,100,1) 100%);
+        }
+
+        /* Estela rosa: degradación del color rosa de la estrella */
+        .star.falling.pink::after {
+            background: linear-gradient(90deg, 
+                rgba(255,105,180,0) 0%,
+                rgba(255,105,180,0.6) 50%,
+                rgba(255,105,180,1) 100%);
         }
 
         @keyframes moveFallingStar {
@@ -815,6 +830,16 @@
                 fallingStar.style.animationDelay = Math.random() * 10 + 's';
                 background.appendChild(fallingStar);
             }
+
+            // Crear 1 estrella rosa que cae diagonalmente
+            const pinkStar = document.createElement('div');
+            pinkStar.className = 'star falling pink';
+            pinkStar.style.left = Math.random() * 75 + '%';
+            pinkStar.style.top = '-50px';
+            const pinkDuration = Math.random() * 6.4 + 8;
+            pinkStar.style.animation = `moveFallingStar ${pinkDuration}s infinite linear`;
+            pinkStar.style.animationDelay = Math.random() * 10 + 's';
+            background.appendChild(pinkStar);
         }
 
         // ========== FUNCIONES DE AUTENTICACIÓN MÚLTIPLE ==========
