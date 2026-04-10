@@ -118,10 +118,9 @@
             position: absolute;
             width: 150px;
             height: 5.625px;
+            right: 50%;
             top: 50%;
-            left: 50%;
             margin-top: -2.8125px;
-            margin-left: 0;
             filter: blur(2px);
             transform: rotate(-45deg);
             transform-origin: right center;
@@ -132,17 +131,17 @@
         /* Estela verde: degradación del color verde de la estrella */
         .star.falling.green::after {
             background: linear-gradient(90deg, 
-                rgba(100,255,150,1) 0%,
+                rgba(100,255,150,0) 0%,
                 rgba(100,255,150,0.6) 50%,
-                rgba(100,255,150,0) 100%);
+                rgba(100,255,150,1) 100%);
         }
 
         /* Estela naranja: degradación del color naranja de la estrella */
         .star.falling.orange::after {
             background: linear-gradient(90deg, 
-                rgba(255,220,100,1) 0%,
+                rgba(255,220,100,0) 0%,
                 rgba(255,220,100,0.6) 50%,
-                rgba(255,220,100,0) 100%);
+                rgba(255,220,100,1) 100%);
         }
 
         @keyframes moveFallingStar {
