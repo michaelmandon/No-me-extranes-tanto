@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No me extrañes tanto </title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         /* ========== RESET Y ESTILOS BASE ========== */
         * {
@@ -519,6 +520,10 @@
             animation: fadeIn 0.3s ease-in;
         }
 
+        .auth-modal-container {
+            background: rgba(10, 0, 8, 0.85);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -535,13 +540,30 @@
         }
 
         .auth-modal {
-            background: white;
-            padding: 50px;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            background: #1a0011;
+            padding: 40px 50px;
+            border: 3px solid #ff69b4;
+            border-radius: 0;
+            box-shadow: 0 0 20px rgba(255,105,180,0.4),
+                        0 0 60px rgba(255,20,80,0.15),
+                        inset 0 0 30px rgba(255,105,180,0.05);
             text-align: center;
-            max-width: 450px;
+            max-width: 480px;
             animation: modalSlideIn 0.6s ease-out;
+            position: relative;
+            outline: 2px dashed #ff1493;
+            outline-offset: 6px;
+        }
+
+        .auth-modal::before {
+            content: '💕';
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            background: #1a0011;
+            padding: 0 10px;
         }
 
         @keyframes modalSlideIn {
@@ -571,15 +593,20 @@
         }
 
         .auth-modal h1 {
-            color: #333;
+            font-family: 'Dancing Script', cursive;
+            color: #ff69b4;
             margin-bottom: 20px;
-            font-size: 32px;
+            font-size: 30px;
+            text-shadow: 0 0 10px rgba(255,105,180,0.6);
+            letter-spacing: 1px;
         }
 
         .auth-modal p {
-            color: #666;
+            font-family: 'Press Start 2P', monospace;
+            color: #ffb6c1;
             margin-bottom: 35px;
-            font-size: 18px;
+            font-size: 10px;
+            line-height: 1.8;
         }
 
         .auth-buttons {
@@ -589,33 +616,42 @@
         }
 
         .auth-btn {
-            padding: 14px 35px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 12px 28px;
+            border: 2px solid;
+            border-radius: 0;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn-yes {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: transparent;
+            color: #ff69b4;
+            border-color: #ff69b4;
         }
 
         .btn-yes:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            background: #ff69b4;
+            color: #1a0011;
+            box-shadow: 0 0 15px rgba(255,105,180,0.6);
+            transform: translateY(-2px);
         }
 
         .btn-no {
-            background: #e0e0e0;
-            color: #333;
+            background: transparent;
+            color: #666;
+            border-color: #444;
         }
 
         .btn-no:hover {
-            background: #d0d0d0;
-            transform: translateY(-3px);
+            background: #330022;
+            color: #ff1493;
+            border-color: #ff1493;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -678,7 +714,7 @@
             <p>Espero que disfrutes cada detalle que he preparado con mucho cariño.</p>
             <p>Sé que me vas a extrañar tanto como yo a ti, pero siempre que lo hagas...</p>
             <p>Podrás encontrarme aquí o siempre que mires las estrellas, recuerda que estamos bajo el mismo cielo.</p>
-            <p>Recordando algunos de nuestros mejores momentos juntos.</p>
+            <p>Aquí podrás recordar algunos de nuestros mejores momentos juntos.</p>
             <p>Donde nuestro amor se hizo tan inmenso como el universo.</p>
             <p>Te amo con mi vida entera ❤️</p>
         </header>
