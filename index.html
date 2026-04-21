@@ -533,18 +533,10 @@
 
         .foto-item {
             background: rgba(26, 0, 17, 0.7);
-            border: 1px solid rgba(255,105,180,0.3);
             border-radius: 0;
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            transition: all 0.3s;
-        }
-
-        .foto-item:hover {
-            border-color: #ff69b4;
-            box-shadow: 0 0 15px rgba(255,105,180,0.3);
-            transform: scale(1.02);
         }
 
         .foto-item img {
@@ -579,28 +571,15 @@
 
         .foto-descripcion {
             width: 100%;
-            padding: 8px;
-            border: none;
-            border-top: 1px solid rgba(255,105,180,0.2);
-            border-radius: 0;
-            background: rgba(10, 0, 8, 0.8);
-            color: #ffb6c1;
+            padding: 8px 10px;
+            border-top: 1px solid rgba(255,105,180,0.15);
+            background: rgba(10, 0, 8, 0.6);
+            color: rgba(255,182,193,0.75);
             font-family: 'Press Start 2P', monospace;
             font-size: 8px;
-            resize: vertical;
-            min-height: 60px;
-            line-height: 1.6;
+            line-height: 1.8;
             box-sizing: border-box;
-        }
-
-        .foto-descripcion:focus {
-            outline: none;
-            border-top-color: #ff69b4;
-            box-shadow: inset 0 0 8px rgba(255,105,180,0.1);
-        }
-
-        .foto-descripcion::placeholder {
-            color: rgba(255,182,193,0.3);
+            margin: 0;
         }
 
         footer {
@@ -1174,7 +1153,7 @@
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="foto-placeholder" style="display:none">⚠️ foto${i}.jpg no encontrada</div>
                     <span class="foto-numero">#${i}</span>
-                    <textarea class="foto-descripcion" placeholder="Añade una descripción..."></textarea>
+                    <p class="foto-descripcion"></p>
                 `;
                 gallery.appendChild(item);
             }
