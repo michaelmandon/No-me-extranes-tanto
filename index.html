@@ -526,6 +526,83 @@
             box-shadow: 0 0 15px rgba(255,105,180,0.3);
         }
 
+        /* ========== GALERÍA DE FOTOS - SECCIÓN INICIO ========== */
+        .fotos-gallery {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .foto-item {
+            background: rgba(26, 0, 17, 0.7);
+            border: 1px solid rgba(255,105,180,0.3);
+            border-radius: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .foto-item:hover {
+            border-color: #ff69b4;
+            box-shadow: 0 0 15px rgba(255,105,180,0.3);
+            transform: scale(1.02);
+        }
+
+        .foto-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+        }
+
+        .foto-placeholder {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,105,180,0.4);
+            font-size: 8px;
+            background: rgba(10, 0, 8, 0.5);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .foto-numero {
+            font-size: 8px;
+            color: rgba(255,105,180,0.5);
+            padding: 4px 8px;
+            text-align: right;
+            font-family: 'Press Start 2P', monospace;
+            border-top: 1px solid rgba(255,105,180,0.1);
+        }
+
+        .foto-descripcion {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-top: 1px solid rgba(255,105,180,0.2);
+            border-radius: 0;
+            background: rgba(10, 0, 8, 0.8);
+            color: #ffb6c1;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            resize: vertical;
+            min-height: 60px;
+            line-height: 1.6;
+            box-sizing: border-box;
+        }
+
+        .foto-descripcion:focus {
+            outline: none;
+            border-top-color: #ff69b4;
+            box-shadow: inset 0 0 8px rgba(255,105,180,0.1);
+        }
+
+        .foto-descripcion::placeholder {
+            color: rgba(255,182,193,0.3);
+        }
+
         footer {
             background: rgba(26, 0, 17, 0.8);
             border-top: 2px solid #ff69b4;
@@ -727,7 +804,7 @@
         <div class="auth-modal">
             <h1>Y la mejor patinadora del mundo?</h1>
             <div class="auth-buttons">
-                <button class="auth-btn btn-yes" onclick="siguienteModal(2)">Obviamente mi amor</button>
+                <button class="auth-btn btn-yes" onclick="siguienteModal(2)">Shi</button>
                 <button class="auth-btn btn-no" onclick="volverModal()">No</button>
             </div>
         </div>
@@ -747,7 +824,7 @@
         <div class="auth-modal">
             <h1>YYYYYY la mejor novia del mundo?</h1>
             <div class="auth-buttons">
-                <button class="auth-btn btn-yes" onclick="permitirAccesoFinal()">Siii</button>
+                <button class="auth-btn btn-yes" onclick="permitirAccesoFinal()">Siempre mi amor</button>
                 <button class="auth-btn btn-no" onclick="volverModal()">No</button>
             </div>
         </div>
@@ -775,10 +852,10 @@
         </nav>
 
         <div class="content">
-            <!-- Sección de Inicio -->
+            <!-- Sección de Inicio - Galería de Fotos -->
             <section id="inicio">
-                <h2>📌 Inicio</h2>
-                <p>Esta es una página web completamente interactiva con multimedia, efectos visuales y funcionalidades JavaScript. Aquí puedes encuentra audio, video y elementos interactivos que harán tu experiencia más divertida.</p>
+                <h2>📸 Nuestros Momentos</h2>
+                <div class="gallery fotos-gallery" id="fotos-gallery"></div>
             </section>
 
             <!-- Sección de Multimedia -->
@@ -1086,9 +1163,29 @@
             });
         }
 
+        // ========== GALERÍA DE FOTOS ==========
+        function crearGaleriaFotos() {
+            const gallery = document.getElementById('fotos-gallery');
+            for (let i = 1; i <= 34; i++) {
+                const item = document.createElement('div');
+                item.className = 'foto-item';
+                item.innerHTML = `
+                    <img src="foto${i}.jpg" alt="Foto ${i}"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="foto-placeholder" style="display:none">⚠️ foto${i}.jpg no encontrada</div>
+                    <span class="foto-numero">#${i}</span>
+                    <textarea class="foto-descripcion" placeholder="Añade una descripción..."></textarea>
+                `;
+                gallery.appendChild(item);
+            }
+        }
+
         // ========== INICIALIZADOR ==========
-        // Crea el fondo animado cuando la página carga
-        window.addEventListener('load', crearFondoEspacio);
+        // Crea el fondo animado y la galería de fotos cuando la página carga
+        window.addEventListener('load', () => {
+            crearFondoEspacio();
+            crearGaleriaFotos();
+        });
     </script>
 </body>
 </html>
