@@ -582,6 +582,48 @@
             margin: 0;
         }
 
+        .countdown-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0 10px 0;
+        }
+
+        .countdown-bloque {
+            background: rgba(10, 0, 8, 0.7);
+            border: 1px solid rgba(255,105,180,0.35);
+            padding: 20px 24px;
+            text-align: center;
+            min-width: 90px;
+        }
+
+        .countdown-numero {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 32px;
+            color: #ff69b4;
+            text-shadow: 0 0 12px rgba(255,105,180,0.7);
+            display: block;
+            line-height: 1.2;
+        }
+
+        .countdown-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            color: rgba(255,182,193,0.6);
+            margin-top: 8px;
+            display: block;
+        }
+
+        .countdown-mensaje {
+            font-family: 'Dancing Script', cursive;
+            font-size: 26px;
+            color: #ff69b4;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255,105,180,0.5);
+            margin-top: 20px;
+        }
+
         /* ========== CHECKLIST JUNTOS ========== */
         .checklist {
             list-style: none;
@@ -977,6 +1019,7 @@
             <a href="#interactivo">Juega conmigo</a>
             <a href="#juntos">Juntos de nuevo</a>
             <a href="#contacto">Contacto</a>
+            <a href="#cuenta-regresiva">Cuenta regresiva</a>
         </nav>
 
         <div class="content">
@@ -1161,6 +1204,33 @@
                 </form>
                 <div class="output" id="formOutput"></div>
             </section>
+                <div class="output" id="formOutput"></div>
+            </section>
+
+            <!-- Cuenta regresiva -->
+            <section id="cuenta-regresiva">
+                <h2>⏳ Cuenta regresiva para estar completos de nuevo</h2>
+                <div class="countdown-grid">
+                    <div class="countdown-bloque">
+                        <span class="countdown-numero" id="cd-dias">--</span>
+                        <span class="countdown-label">DÍAS</span>
+                    </div>
+                    <div class="countdown-bloque">
+                        <span class="countdown-numero" id="cd-horas">--</span>
+                        <span class="countdown-label">HORAS</span>
+                    </div>
+                    <div class="countdown-bloque">
+                        <span class="countdown-numero" id="cd-minutos">--</span>
+                        <span class="countdown-label">MINUTOS</span>
+                    </div>
+                    <div class="countdown-bloque">
+                        <span class="countdown-numero" id="cd-segundos">--</span>
+                        <span class="countdown-label">SEGUNDOS</span>
+                    </div>
+                </div>
+                <p class="countdown-mensaje" id="cd-mensaje"></p>
+            </section>
+
             <footer>
                 <p>&copy; 2026 - Nuestro rinconcito hecho con ❤️</p>
             </footer>
@@ -1539,11 +1609,40 @@
             }
         }
 
+        // ========== CUENTA REGRESIVA ==========
+        function iniciarCuentaRegresiva() {
+            const META = new Date(2026, 4, 11, 11, 5, 0); // 11 mayo 2026, 11:05
+            function actualizar() {
+                const ahora = new Date();
+                const diff = META - ahora;
+                if (diff <= 0) {
+                    document.getElementById('cd-dias').textContent = '00';
+                    document.getElementById('cd-horas').textContent = '00';
+                    document.getElementById('cd-minutos').textContent = '00';
+                    document.getElementById('cd-segundos').textContent = '00';
+                    document.getElementById('cd-mensaje').textContent = '¡Ya estamos juntos de nuevo! ♥';
+                    return;
+                }
+                const dias    = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const horas   = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos= Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('cd-dias').textContent     = String(dias).padStart(2, '0');
+                document.getElementById('cd-horas').textContent    = String(horas).padStart(2, '0');
+                document.getElementById('cd-minutos').textContent  = String(minutos).padStart(2, '0');
+                document.getElementById('cd-segundos').textContent = String(segundos).padStart(2, '0');
+                document.getElementById('cd-mensaje').textContent  = '¡Pronto volveré a tu lado, mi amor! 💕';
+            }
+            actualizar();
+            setInterval(actualizar, 1000);
+        }
+
         // ========== INICIALIZADOR ==========
         // Crea el fondo animado y la galería de fotos cuando la página carga
         window.addEventListener('load', () => {
             crearFondoEspacio();
             crearGaleriaFotos();
+            iniciarCuentaRegresiva();
 
             // Pausar música de fondo cuando se reproduce un audio de la sección
             const bgMusic = document.getElementById('background-music');
