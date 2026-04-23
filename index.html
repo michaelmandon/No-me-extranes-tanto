@@ -1141,6 +1141,7 @@
                 <div class="button-group" style="justify-content:center; margin-top:30px;">
                     <button onclick="lluviaDeCorazones()">Presiona aquí si me amas ♥</button>
                     <button onclick="mensajeExtranas()">Presiona aquí si me extrañas 💔</button>
+                    <button onclick="iniciarQuiz()">Quiz de amor 💘</button>
                 </div>
             </section>
 
@@ -1424,6 +1425,60 @@
             `;
             modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
             document.body.appendChild(modal);
+        }
+
+        // ========== QUIZ DE AMOR ==========
+        function iniciarQuiz() {
+            mostrarPregunta1();
+        }
+
+        function mostrarModalQuiz(contenidoHTML) {
+            document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
+            const modal = document.createElement('div');
+            modal.className = 'modal-mensaje modal-quiz';
+            modal.innerHTML = `<div class="modal-mensaje-caja">${contenidoHTML}</div>`;
+            document.body.appendChild(modal);
+            return modal;
+        }
+
+        function mostrarPregunta1() {
+            mostrarModalQuiz(`
+                <p style="margin-bottom:20px; font-size:9px; color:#ff69b4;">Pregunta 1 de 2</p>
+                <p>¿Quién dijo te amo primero?</p>
+                <div class="button-group" style="justify-content:center; margin-top:20px; flex-wrap:wrap;">
+                    <button onclick="respuestaPregunta1('novio')">Novio</button>
+                    <button onclick="respuestaPregunta1('novia')">Novia</button>
+                </div>
+            `);
+        }
+
+        function respuestaPregunta1(respuesta) {
+            if (respuesta === 'novio') {
+                mostrarPregunta2();
+            } else {
+                document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
+                mostrarModalMensaje('Ups esa no era cielo, cualquier queja o reclamo en el buzón de sugerencias por favor jeje te amo. 😘');
+            }
+        }
+
+        function mostrarPregunta2() {
+            mostrarModalQuiz(`
+                <p style="margin-bottom:20px; font-size:9px; color:#ff69b4;">Pregunta 2 de 2</p>
+                <p>Usted porque es tan bonita niña?</p>
+                <div class="button-group" style="justify-content:center; margin-top:20px; flex-wrap:wrap;">
+                    <button onclick="respuestaPregunta2('nose')">No sé 😊</button>
+                    <button onclick="respuestaPregunta2('bane')">Me bañe jeje</button>
+                </div>
+            `);
+        }
+
+        function respuestaPregunta2(respuesta) {
+            document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
+            if (respuesta === 'nose') {
+                mostrarModalMensaje('Jaja no sabes pero yo sí lo sé, ¡eres increíble! 💕');
+            } else {
+                mostrarModalMensaje('¡Me lo imaginaba! Sigue bañándote que queda muy bien jeje, te amo mi niña. 😘♥');
+            }
         }
 
         // ========== CHECKLIST ==========
