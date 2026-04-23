@@ -650,6 +650,58 @@
             color: rgba(255,105,180,0.45);
         }
 
+        /* ========== LLUVIA DE CORAZONES ========== */
+        .corazon-lluvia {
+            position: fixed;
+            top: -60px;
+            font-size: 24px;
+            animation: caerCorazon linear forwards;
+            pointer-events: none;
+            z-index: 9999;
+            user-select: none;
+        }
+
+        @keyframes caerCorazon {
+            0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+            80%  { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(30deg); opacity: 0; }
+        }
+
+        /* MODAL MENSAJE */
+        .modal-mensaje {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-mensaje-caja {
+            background: #1a0011;
+            border: 2px solid #ff69b4;
+            padding: 40px 50px;
+            text-align: center;
+            max-width: 420px;
+            box-shadow: 0 0 30px rgba(255,105,180,0.4);
+            animation: modalSlideIn 0.4s ease;
+        }
+
+        .modal-mensaje-caja p {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            color: #ffb6c1;
+            line-height: 2;
+            margin-bottom: 25px;
+        }
+
+        .modal-mensaje-caja button {
+            font-size: 8px;
+        }
+
         /* ========== FOTO BLOQUEADA ========== */
         .foto-locked {
             width: 100%;
@@ -922,7 +974,7 @@
             <a href="#inicio">Inicio</a>
             <a href="#multimedia">Para cuando te sientas...</a>
             <a href="#playlist">Playlist</a>
-            <a href="#interactivo">Interactivo</a>
+            <a href="#interactivo">Juega conmigo</a>
             <a href="#juntos">Juntos de nuevo</a>
             <a href="#contacto">Contacto</a>
         </nav>
@@ -1036,49 +1088,6 @@
                 </div>
             </section>
 
-            <!-- Sección Interactiva -->
-            <section id="interactivo">
-                <h2>🎮 Zona Interactiva</h2>
-
-                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Botones Interactivos:</h3>
-                <div class="button-group">
-                    <button onclick="saludar()">👋 Saludar</button>
-                    <button onclick="cambiarColor()">🎨 Cambiar Color</button>
-                    <button onclick="mostrarFecha()">📅 Mostrar Fecha</button>
-                    <button onclick="contarClicks()">📊 Contar Clics</button>
-                </div>
-                <div class="output" id="output">Haz clic en los botones para ver las cosas suceder...</div>
-
-                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Galería Interactiva:</h3>
-                <div class="gallery">
-                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 1')">Imagen 1</div>
-                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 2')">Imagen 2</div>
-                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 3')">Imagen 3</div>
-                    <div class="gallery-item" onclick="mostrarMensaje('Imagen 4')">Imagen 4</div>
-                </div>
-
-                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Cuadro de Color Dinámico:</h3>
-                <div class="color-box" id="colorBox" onclick="colorAleatorio()" title="Haz clic para cambiar de color"></div>
-                <p><small>Haz clic en la caja para cambiar su color</small></p>
-
-                <h3 style="color: #764ba2; margin: 20px 0 10px 0;">Calculadora Simple:</h3>
-                <div class="form-group">
-                    <label>Número 1:</label>
-                    <input type="number" id="num1" placeholder="Ingresa un número">
-                </div>
-                <div class="form-group">
-                    <label>Número 2:</label>
-                    <input type="number" id="num2" placeholder="Ingresa otro número">
-                </div>
-                <div class="button-group">
-                    <button onclick="sumar()">➕ Sumar</button>
-                    <button onclick="restar()">➖ Restar</button>
-                    <button onclick="multiplicar()">✖️ Multiplicar</button>
-                    <button onclick="dividir()">➗ Dividir</button>
-                </div>
-                <div class="output" id="resultOutput">El resultado aparecerá aquí</div>
-            </section>
-
             <!-- Sección Juntos de nuevo -->
             <section id="juntos">
                 <h2>💕 Cuando estemos juntos de nuevo...</h2>
@@ -1124,6 +1133,15 @@
                         <label class="checklist-label" for="tarea10">Compartir la cena en tu casa</label>
                     </li>
                 </ul>
+            </section>
+
+            <!-- Sección Interactiva -->
+            <section id="interactivo">
+                <h2>🎮 ¡Juega conmigo!</h2>
+                <div class="button-group" style="justify-content:center; margin-top:30px;">
+                    <button onclick="lluviaDeCorazones()">Presiona aquí si me amas ♥</button>
+                    <button onclick="mensajeExtranas()">Presiona aquí si me extrañas 💔</button>
+                </div>
             </section>
 
             <!-- Sección de Contacto -->
@@ -1370,6 +1388,42 @@
             ['nombre', 'email', 'mensaje'].forEach(id => {
                 document.getElementById(id).value = '';
             });
+        }
+
+        // ========== JUEGA CONMIGO ==========
+        function lluviaDeCorazones() {
+            const emojis = ['♥', '💕', '💖', '💗', '💓', '🥰'];
+            for (let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('span');
+                    h.className = 'corazon-lluvia';
+                    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.fontSize = (16 + Math.random() * 24) + 'px';
+                    const dur = 2.5 + Math.random() * 2;
+                    h.style.animationDuration = dur + 's';
+                    document.body.appendChild(h);
+                    setTimeout(() => h.remove(), dur * 1000);
+                }, i * 80);
+            }
+            mostrarModalMensaje('♥ Te amo más <3');
+        }
+
+        function mensajeExtranas() {
+            mostrarModalMensaje('Pronto estaremos juntos de nuevo, no estés triste por que no estoy, sino feliz sabiendo que volveré. 💕');
+        }
+
+        function mostrarModalMensaje(texto) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-mensaje';
+            modal.innerHTML = `
+                <div class="modal-mensaje-caja">
+                    <p>${texto}</p>
+                    <button onclick="this.closest('.modal-mensaje').remove()">Cerrar ♥</button>
+                </div>
+            `;
+            modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
+            document.body.appendChild(modal);
         }
 
         // ========== CHECKLIST ==========
