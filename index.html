@@ -853,6 +853,7 @@
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#multimedia">Para cuando te sientas...</a>
+            <a href="#playlist">Playlist</a>
             <a href="#interactivo">Interactivo</a>
             <a href="#contacto">Contacto</a>
         </nav>
@@ -869,7 +870,7 @@
                 <h2>� Acá estoy para cuando te sientas...</h2>
 
                 <div class="media-container">
-                    <p>💭 Nostálgica</p>
+                    <p>💭 Extrañándome</p>
                     <audio controls>
                         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
                         Tu navegador no soporta el reproductor de audio.
@@ -948,6 +949,22 @@
                     </audio>
                 </div>
 
+            </section>
+
+            <!-- Sección Playlist -->
+            <section id="playlist">
+                <h2>🎶 Playlist creada pensando en ti</h2>
+                <div class="media-container">
+                    <iframe
+                        src="https://open.spotify.com/embed/playlist/4LvF3RTway3OcB8mc0VJ1D?utm_source=generator&theme=0"
+                        width="100%"
+                        height="380"
+                        frameborder="0"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        style="border-radius:0;">
+                    </iframe>
+                </div>
             </section>
 
             <!-- Sección Interactiva -->
@@ -1296,6 +1313,32 @@
         window.addEventListener('load', () => {
             crearFondoEspacio();
             crearGaleriaFotos();
+
+            // Pausar música de fondo cuando se reproduce un audio de la sección
+            const bgMusic = document.getElementById('background-music');
+            const sectionAudios = document.querySelectorAll('#multimedia audio');
+            sectionAudios.forEach(audio => {
+                audio.addEventListener('play', () => {
+                    if (!bgMusic.paused) {
+                        bgMusic.pause();
+                        bgMusic._pausedBySection = true;
+                    }
+                });
+                audio.addEventListener('pause', () => {
+                    const anyPlaying = [...sectionAudios].some(a => !a.paused);
+                    if (!anyPlaying && bgMusic._pausedBySection) {
+                        bgMusic.play().catch(() => {});
+                        bgMusic._pausedBySection = false;
+                    }
+                });
+                audio.addEventListener('ended', () => {
+                    const anyPlaying = [...sectionAudios].some(a => !a.paused);
+                    if (!anyPlaying && bgMusic._pausedBySection) {
+                        bgMusic.play().catch(() => {});
+                        bgMusic._pausedBySection = false;
+                    }
+                });
+            });
         });
     </script>
 </body>
