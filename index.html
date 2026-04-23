@@ -1175,6 +1175,14 @@
                         <input type="checkbox" class="checklist-check" id="tarea10" onchange="toggleTarea(this)">
                         <label class="checklist-label" for="tarea10">Compartir la cena en tu casa</label>
                     </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea11" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea11">Ver la novela juntos</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea12" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea12">Ir por un helado a la milkería</label>
+                    </li>
                 </ul>
             </section>
 
@@ -1541,9 +1549,9 @@
         function respuestaPregunta2(respuesta) {
             document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
             if (respuesta === 'nose') {
-                mostrarModalMensaje('Jaja no sabes pero yo sí lo sé, ¡eres increíble! 💕');
+                mostrarModalMensaje('Jaja yo tampoco peroo, ¡eres muy hermosa cielo! 💕');
             } else {
-                mostrarModalMensaje('¡Me lo imaginaba! Sigue bañándote que queda muy bien jeje, te amo mi niña. 😘♥');
+                mostrarModalMensaje('¡Me lo imaginaba! Sigue bañándote que queda muy bien jeje, te amo niña. 😘♥');
             }
         }
 
