@@ -582,6 +582,33 @@
             margin: 0;
         }
 
+        /* ========== FOTO BLOQUEADA ========== */
+        .foto-locked {
+            width: 100%;
+            height: 180px;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .foto-locked svg {
+            width: 60px;
+            height: 60px;
+            filter: drop-shadow(0 0 8px rgba(180,0,40,0.7));
+        }
+
+        .foto-locked-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            color: rgba(180,0,40,0.7);
+            text-align: center;
+            padding: 0 8px;
+            line-height: 1.8;
+        }
+
         footer {
             background: rgba(26, 0, 17, 0.8);
             border-top: 2px solid #ff69b4;
@@ -1143,18 +1170,53 @@
         }
 
         // ========== GALERÍA DE FOTOS ==========
+        const FECHA_INICIO = new Date(2026, 3, 24); // 24 de abril de 2026 (mes 0-indexado)
+
+        function fotosDesbloqueadas() {
+            const hoy = new Date();
+            hoy.setHours(0, 0, 0, 0);
+            const inicio = new Date(FECHA_INICIO);
+            inicio.setHours(0, 0, 0, 0);
+            const diasTranscurridos = Math.floor((hoy - inicio) / (1000 * 60 * 60 * 24));
+            if (diasTranscurridos < 0) return 0;
+            return Math.min((diasTranscurridos + 1) * 2, 34);
+        }
+
+        const CANDADO_SVG = `<svg viewBox="0 0 64 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- cuerpo del candado -->
+          <rect x="8" y="34" width="48" height="36" rx="5" ry="5" fill="#8b0000" stroke="#cc0022" stroke-width="2"/>
+          <!-- arco del candado -->
+          <path d="M18 34 V22 C18 10 46 10 46 22 V34" stroke="#cc0022" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <!-- corazón como cerradura -->
+          <path d="M32 52 C32 52 22 44 22 39 C22 35.5 25 33 28 33 C30 33 31.5 34 32 35.5 C32.5 34 34 33 36 33 C39 33 42 35.5 42 39 C42 44 32 52 32 52 Z" fill="#ff0033" stroke="#ff3366" stroke-width="1"/>
+        </svg>`;
+
         function crearGaleriaFotos() {
             const gallery = document.getElementById('fotos-gallery');
+            const desbloqueadas = fotosDesbloqueadas();
             for (let i = 1; i <= 34; i++) {
                 const item = document.createElement('div');
                 item.className = 'foto-item';
-                item.innerHTML = `
-                    <img src="foto${i}.jpg" alt="Foto ${i}"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="foto-placeholder" style="display:none">⚠️ foto${i}.jpg no encontrada</div>
-                    <span class="foto-numero">#${i}</span>
-                    <p class="foto-descripcion"></p>
-                `;
+                if (i <= desbloqueadas) {
+                    item.innerHTML = `
+                        <img src="foto${i}.jpg" alt="Foto ${i}"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="foto-placeholder" style="display:none">⚠️ foto${i}.jpg no encontrada</div>
+                        <span class="foto-numero">#${i}</span>
+                        <p class="foto-descripcion"></p>
+                    `;
+                } else {
+                    const diaDesbloqueo = new Date(FECHA_INICIO);
+                    diaDesbloqueo.setDate(diaDesbloqueo.getDate() + Math.ceil(i / 2) - 1);
+                    const fechaStr = diaDesbloqueo.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+                    item.innerHTML = `
+                        <div class="foto-locked">
+                            ${CANDADO_SVG}
+                            <span class="foto-locked-label">Disponible el ${fechaStr}</span>
+                        </div>
+                        <span class="foto-numero">#${i}</span>
+                    `;
+                }
                 gallery.appendChild(item);
             }
         }
