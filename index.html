@@ -582,6 +582,74 @@
             margin: 0;
         }
 
+        /* ========== CHECKLIST JUNTOS ========== */
+        .checklist {
+            list-style: none;
+            margin: 10px 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: rgba(26, 0, 17, 0.5);
+            border: 1px solid rgba(255,105,180,0.2);
+            transition: border-color 0.3s;
+        }
+
+        .checklist-item:hover {
+            border-color: rgba(255,105,180,0.5);
+        }
+
+        .checklist-check {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border: 2px solid #ff69b4;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .checklist-check:checked {
+            background: transparent;
+            border-color: #ff69b4;
+        }
+
+        .checklist-check:checked::after {
+            content: '\2665';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            color: #ff69b4;
+            text-shadow: 0 0 8px rgba(255,105,180,0.8);
+        }
+
+        .checklist-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            color: #ffb6c1;
+            line-height: 1.8;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checklist-label.completado {
+            text-decoration: line-through;
+            font-style: italic;
+            color: rgba(255,105,180,0.45);
+        }
+
         /* ========== FOTO BLOQUEADA ========== */
         .foto-locked {
             width: 100%;
@@ -855,6 +923,7 @@
             <a href="#multimedia">Para cuando te sientas...</a>
             <a href="#playlist">Playlist</a>
             <a href="#interactivo">Interactivo</a>
+            <a href="#juntos">Juntos de nuevo</a>
             <a href="#contacto">Contacto</a>
         </nav>
 
@@ -1008,6 +1077,53 @@
                     <button onclick="dividir()">➗ Dividir</button>
                 </div>
                 <div class="output" id="resultOutput">El resultado aparecerá aquí</div>
+            </section>
+
+            <!-- Sección Juntos de nuevo -->
+            <section id="juntos">
+                <h2>💕 Cuando estemos juntos de nuevo...</h2>
+                <ul class="checklist" id="checklist-juntos">
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea1" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea1">Entregarte los detalles que te traje de mi viaje</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea2" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea2">Ir a comer algo rico</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea3" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea3">Tener una cita romántica de picnic en el parque</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea4" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea4">Ir a cineee</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea5" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea5">Ir de brunch</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea6" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea6">Ir a trotar a la pista atlética</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea7" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea7">Ir a hacer gimnasio juntos</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea8" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea8">Ir por unas onces a la panadería</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea9" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea9">Acompañarte mientras haces tus tareas</label>
+                    </li>
+                    <li class="checklist-item">
+                        <input type="checkbox" class="checklist-check" id="tarea10" onchange="toggleTarea(this)">
+                        <label class="checklist-label" for="tarea10">Compartir la cena en tu casa</label>
+                    </li>
+                </ul>
             </section>
 
             <!-- Sección de Contacto -->
@@ -1256,6 +1372,16 @@
             });
         }
 
+        // ========== CHECKLIST ==========
+        function toggleTarea(checkbox) {
+            const label = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                label.classList.add('completado');
+            } else {
+                label.classList.remove('completado');
+            }
+        }
+
         // ========== GALERÍA DE FOTOS ==========
         const FECHA_INICIO = new Date(2026, 3, 24); // 24 de abril de 2026 (mes 0-indexado)
 
@@ -1339,6 +1465,30 @@
                     }
                 });
             });
+
+            // Pausar música de fondo al hacer clic en el iframe de Spotify
+            // (limitación del navegador: no se puede detectar play/pause dentro de un iframe cross-origin)
+            const spotifyIframe = document.querySelector('#playlist iframe');
+            if (spotifyIframe) {
+                spotifyIframe.addEventListener('mouseenter', () => {
+                    window.addEventListener('blur', function pauseOnSpotifyFocus() {
+                        if (!bgMusic.paused) {
+                            bgMusic.pause();
+                            bgMusic._pausedBySpotify = true;
+                        }
+                        window.removeEventListener('blur', pauseOnSpotifyFocus);
+                    });
+                });
+
+                // Reanudar música si el usuario vuelve al foco de la ventana y no hay audio de sección sonando
+                window.addEventListener('focus', () => {
+                    const anyPlaying = [...sectionAudios].some(a => !a.paused);
+                    if (!anyPlaying && bgMusic._pausedBySpotify) {
+                        bgMusic.play().catch(() => {});
+                        bgMusic._pausedBySpotify = false;
+                    }
+                });
+            }
         });
     </script>
 </body>
