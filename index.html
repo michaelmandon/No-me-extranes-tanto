@@ -1147,14 +1147,10 @@
 
             <!-- Sección de Contacto -->
             <section id="contacto">
-                <h2>📧 Contacto</h2>
+                <h2>📧 Envíame un mensaje (Buzón de sugerencias también jeje)</h2>
                 <form onsubmit="enviarFormulario(event)">
                     <div class="form-group">
-                        <label>Nombre:</label>
-                        <input type="text" id="nombre" placeholder="Tu nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email:</label>
+                        <label>Tu email:</label>
                         <input type="email" id="email" placeholder="Tu email" required>
                     </div>
                     <div class="form-group">
@@ -1376,19 +1372,19 @@
         function multiplicar() { realizarOperacion('×'); }
         function dividir() { realizarOperacion('÷'); }
 
-        // Procesa el envío del formulario y lo limpia
+        // Abre el cliente de correo con los datos prellenados
         function enviarFormulario(event) {
             event.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const email = document.getElementById('email').value;
-            const mensaje = document.getElementById('mensaje').value;
-            const output = `✅ ¡Mensaje enviado! <br>Nombre: ${nombre}<br>Email: ${email}<br>Mensaje: ${mensaje}`;
-            document.getElementById('formOutput').innerHTML = output;
-            
-            // Limpiar campos del formulario
-            ['nombre', 'email', 'mensaje'].forEach(id => {
-                document.getElementById(id).value = '';
-            });
+            const email = document.getElementById('email').value.trim();
+            const mensaje = document.getElementById('mensaje').value.trim();
+            const destinatario = 'michaelmandon8@gmail.com';
+            const asunto = encodeURIComponent('Mensaje desde nuestro rinconcito ♥');
+            const cuerpo = encodeURIComponent(mensaje);
+            const mailtoLink = `mailto:${destinatario}?from=${encodeURIComponent(email)}&subject=${asunto}&body=${cuerpo}`;
+            window.location.href = mailtoLink;
+            document.getElementById('formOutput').textContent = '✅ Abriendo tu cliente de correo... ¡Recuerda darle Enviar!';
+            document.getElementById('email').value = '';
+            document.getElementById('mensaje').value = '';
         }
 
         // ========== JUEGA CONMIGO ==========
