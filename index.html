@@ -1587,6 +1587,43 @@
           <path d="M32 52 C32 52 22 44 22 39 C22 35.5 25 33 28 33 C30 33 31.5 34 32 35.5 C32.5 34 34 33 36 33 C39 33 42 35.5 42 39 C42 44 32 52 32 52 Z" fill="#ff0033" stroke="#ff3366" stroke-width="1"/>
         </svg>`;
 
+        const DESCRIPCIONES = [
+            "Cómo olvidar este día? Este día la pasé increíble. Estaba muy nervioso por nuestro primer beso, la verdad fue justo como lo soñé. Te veías espectacular y me encantó conocer esa versión premium de ti en ese bote y en todas las atracciones que pasamos juntos.",
+            "Nuestra primera cascada juntos. Me di cuenta de qué te estaba empezando a querer mucho y no sabía lo que nos esperaba en un futuro.",
+            "Esta cita fue muy bonita, recuerdo que esta vez me invitaste tú a comer algo que tú querías y me sentí muy querido por ti. En ese momento recuerdo cómo la pasamos de bien y nos reímos mucho.",
+            "Éste es el día que si mi mamá aún no se entera jaja. Recuerdo inolvidable para los dos. Algún día cuando estemos mayor y comprometidos le contaremos juntos.",
+            "Cuándo veo esta foto, me doy cuenta que, aunque a veces encontremos cosas muy diferentes en el uno del otro, son más bonitas las cosas que compartimos juntos, como el deporte y el amor que nos tenemos.",
+            "Nuestra primera rumba juntos, después de conocernos aquella noche. Recuerdo que esa noche se me vinieron recuerdos de cuando nos conocimos y fue espectacular.",
+            "Cuándo vea esta foto, te recuerdo todos esos momentos mientras nos conocíamos y nos sentamos hablar afuera de tu casa. En verdad fui muy feliz contigo en esa época.",
+            "Gracias por siempre acompañarme a mis partidos y hacer el esfuerzo por estar ahí siempre dándome compañía y algo de tomar, no importa como haya estado el partido ni el clima.",
+            "Nuestro primer brunch. Qué bonito recuerdo, cómo olvidar ese plato tan nacido que me comí ja ja ja y lo espectacular que te veías ese día.",
+            "Nuestro primer concierto juntos. Recuerdo que ese día fue increíble pasar y cantar esas canciones que amamos y las que te dedicaron de un principio estuvieron geniales.",
+            "Recuerdo importante para mí. Ese día te abriste conmigo de una manera que yo valoro mucho y pude sentir todo lo que tenías reprimido. Te agradezco por hacerlo y te prometo que siempre estaré para escucharte.",
+            "Yo creo que esa foto nos define: tú y yo riéndonos, siendo cómplices el uno del otro. No importa si fue un buen día o un mal día, siempre los dos juntos.",
+            "Esta foto no podía faltar. Recuerdo estar tan nervioso como en la primera foto, a punto de montarme y enfrentar uno de mis mayores miedos. Gracias por dar ese sí que me hizo el hombre más afortunado del mundo.",
+            "Nuestra primera salida de la mesa de los santos. Aunque no fue mucho el tiempo, disfruté cada momento y me encantó volver a recorrer lugares contigo y conocerlos de nuevo.",
+            "Qué buen recuerdo este. Nuestra primera maratón, y espero y deseo que sean muchos más planes deportivos contigo. Recuerdo con gran amor cómo nos apoyamos el uno al otro en los momentos más difíciles de la carrera y sobretodo esa última subida, donde te apoyé con todas las fuerzas que me quedaban y verte sin rendirte me llenó de amor y admiración.",
+            "Una salidita a cine casual como todas, pero cada una de ellas única. Siempre es una historia nueva, una experiencia nueva, pero el mismo sentimiento.",
+            "Nuestro primer día de velitas juntos. Recuerdo el gran esfuerzo que hiciste de llegar cansada a casa y disfrutar conmigo lo que quedaba del día. Mira qué bonita se ve esa luna, igual que tú.",
+            "Gracias por este día tan maravilloso cielo. Aunque terminé con mucho dolor de espalda, recuerdo todas las cosas que nos contamos ese día y esa confianza tan profunda entre los dos. Además nos quedaron hermosos nuestros abuelitos. Espero algún día puedan llegar así contigo.",
+            "Nuestro premio: diciembre juntos. Le pido a Dios que no sea lo último, porque ese día sólo esperaba por ti y lo quería pasar contigo y toda mi familia.",
+            "Cuándo conocí a tu familia por primera vez me puse feliz al ver de dónde había salido esta niña tan hermosa y con qué personas había crecido.",
+            "Esta foto es especial. Muchas gracias de corazón por cumplirme un sueño y hacerlo con tanto amor. Este día me lo llevo para siempre en mi corazón. No digo más porque me dan ganas de llorar.",
+            "Nosotros buscando cualquier plan para estar juntos. Gracias por tu energía maravillosa. Te veías hermosa esa noche cariño.",
+            "Esta foto me hace recordar cada noche que pasamos en tu casa, recordando el amor que me irradia tu familia y lo bien que nos sentimos estando uno al lado del otro solo sentados viendo tele.",
+            "Qué bonito poder pasear con tu familia y sentirme tan acogido por todos. Gracias por este día, siempre niño bueno.",
+            "Tu cumpleaños. Espero que te haya gustado todo lo que pude darte ese día. Me hubiera encantado darte muchas muchas más cosas, pero trabajaré, ya verás que te la daré y todo el tiempo que pueda.",
+            "Ese día me hizo muy feliz verte tan feliz, compartiendo con nosotros y disfrutando de esa tarde llena de risas y momentos alegres. Por más momentos así, llenos de felicidad y alegría.",
+            "Un brunch bonito. Nos estábamos muriendo de frío, pero la pasamos muy bien y comimos muy rico. Gracias por los esfuerzos que haces por invitarme a comer a lugares. Te amo.",
+            "Nuestro primer San Valentín juntos, verdaderamente especial. Gracias por encargarte de eso. Fuiste una persona tan maravillosa ese día, fue muy lindo para mí y lo recordaré siempre.",
+            "Pasé un cumpleaños increíble gracias a mi familia y a ti, pero sobre todo a ti, que con tus detalles me alegraste ese día como no imaginas. Recuerda todo lo bonito que hiciste por mí y me encantaría poder compartir todo el resto de mis cumpleaños contigo.",
+            "Recuerdito trotando con la camisa que me habías regalado. Muchas gracias por todos tus detalles y preocuparte siempre por mí, querer darme lo mejor siempre. Eso demuestra lo increíble que eres.",
+            "Me encanta verte tan feliz. Por eso, aunque sabes que no es mi música favorita, siempre te apoyaré y te cumpliré todos tus deseos y me gozaré todas las canciones junto a ti.",
+            "Gracias amorcito por acompañarme y estar presente en un día tan importante para mí. El esfuerzo que hiciste valió la pena, porque tu presencia y la de mi mamá fue todo lo que necesité para estar feliz.",
+            "Día duro, día importante, día de aprendizaje, día de paciencia y día de amor. Lo más importante de este día para mí fue lograr superar ese momento tan difícil que pasamos y, así como en el camino, seguir avanzando juntos. No importan cuántas curvas, cuán difícil sea la subida o qué tan agotados estemos, siempre avanzando juntos.",
+            "Gracias por este regalo, por tu esfuerzo, por tu entendimiento, por tus sentimientos y por todo lo que haces por mí. La pasé increíble como siempre contigo y me encantó verte tan feliz disfrutando. ¡Te amooooooo!"
+        ];
+
         function crearGaleriaFotos() {
             const gallery = document.getElementById('fotos-gallery');
             const desbloqueadas = fotosDesbloqueadas();
@@ -1599,7 +1636,7 @@
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                         <div class="foto-placeholder" style="display:none">⚠️ foto${i}.jpg no encontrada</div>
                         <span class="foto-numero">#${i}</span>
-                        <p class="foto-descripcion"></p>
+                        <p class="foto-descripcion">${DESCRIPCIONES[i - 1]}</p>
                     `;
                 } else {
                     const diaDesbloqueo = new Date(FECHA_INICIO);
