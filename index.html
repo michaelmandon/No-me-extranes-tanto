@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No me extrañes tanto </title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         /* ========== RESET Y ESTILOS BASE ========== */
         * {
@@ -742,6 +743,40 @@
 
         .modal-mensaje-caja button {
             font-size: 8px;
+        }
+
+        /* QUIZ - INPUT DE RESPUESTA */
+        .quiz-input {
+            width: 100%;
+            padding: 10px;
+            margin: 16px 0 20px 0;
+            background: rgba(10, 0, 8, 0.8);
+            border: 1px solid rgba(255,105,180,0.4);
+            color: #ffb6c1;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            line-height: 1.8;
+            resize: vertical;
+            min-height: 70px;
+            box-sizing: border-box;
+        }
+
+        .quiz-input:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 8px rgba(255,105,180,0.3);
+        }
+
+        .quiz-input::placeholder {
+            color: rgba(255,182,193,0.3);
+        }
+
+        .quiz-progreso {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            color: rgba(255,105,180,0.6);
+            margin-bottom: 14px;
+            display: block;
         }
 
         /* ========== FOTO BLOQUEADA ========== */
@@ -1486,58 +1521,118 @@
             document.body.appendChild(modal);
         }
 
-        // ========== QUIZ DE AMOR ==========
+        // ========== QUIZ DE AMOR (PREGUNTAS ABIERTAS) ==========
+        const QUIZ_PREGUNTAS = [
+            '¿Cuál fue tu primera impresión de mí?',
+            'Si nuestra relación fuera una película, ¿cuál sería?',
+            '¿Quién es más dramático en la relación?',
+            'Si intercambiáramos cuerpos por un día, ¿qué sería lo primero que harías?',
+            '¿Qué hábito mío te da risa pero no me dices?',
+            '¿Qué canción describe mejor nuestra relación?',
+            'Si fuéramos un meme, ¿cuál seríamos?',
+            'Si tuvieras que sobrevivir conmigo en una isla, ¿qué te preocuparía más?',
+            '¿En qué momento sentiste que esto iba en serio?',
+            '¿Qué es lo que más valoras de mí que no suelo notar?',
+            '¿Qué crees que he mejorado desde que estamos juntos?',
+            '¿Qué parte de ti sientes que puedes ser solo conmigo?',
+            '¿Qué cosa pequeña hago que te hace sentir amado/a?',
+            '¿Qué te da miedo perder en nuestra relación?',
+            '¿Qué significa para ti una relación sana?',
+            '¿Qué crees que deberíamos mejorar como pareja?',
+            '¿Qué necesitas de mí que nunca me has dicho claramente?',
+            '¿Qué harías diferente si empezáramos desde cero?',
+            '¿Qué momento conmigo repetirías mil veces?',
+            '¿Qué te hace sentir más conectado/a conmigo?',
+            '¿Qué fantasía (emocional o no) te gustaría vivir juntos?',
+            '¿Qué detalle mío te parece irresistible?',
+            '¿Cuándo te sientes más cerca de mí?'
+        ];
+
+        let quizRespuestas = [];
+        let quizPreguntaActual = 0;
+
         function iniciarQuiz() {
-            mostrarPregunta1();
+            quizRespuestas = [];
+            quizPreguntaActual = 0;
+            mostrarPreguntaQuiz();
         }
 
         function mostrarModalQuiz(contenidoHTML) {
             document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
             const modal = document.createElement('div');
             modal.className = 'modal-mensaje modal-quiz';
-            modal.innerHTML = `<div class="modal-mensaje-caja">${contenidoHTML}</div>`;
+            modal.innerHTML = `<div class="modal-mensaje-caja" style="max-width:500px; width:90%;">${contenidoHTML}</div>`;
             document.body.appendChild(modal);
+            const ta = modal.querySelector('.quiz-input');
+            if (ta) ta.focus();
             return modal;
         }
 
-        function mostrarPregunta1() {
+        function mostrarPreguntaQuiz() {
+            const total = QUIZ_PREGUNTAS.length;
+            const i = quizPreguntaActual;
             mostrarModalQuiz(`
-                <p style="margin-bottom:20px; font-size:9px; color:#ff69b4;">Pregunta 1 de 2</p>
-                <p>¿Quién dijo te amo primero?</p>
-                <div class="button-group" style="justify-content:center; margin-top:20px; flex-wrap:wrap;">
-                    <button onclick="respuestaPregunta1('novio')">Novio</button>
-                    <button onclick="respuestaPregunta1('novia')">Novia</button>
+                <span class="quiz-progreso">Pregunta ${i + 1} de ${total}</span>
+                <p style="text-align:left; font-size:9px;">${QUIZ_PREGUNTAS[i]}</p>
+                <textarea class="quiz-input" id="quiz-respuesta" placeholder="Escribe tu respuesta..."></textarea>
+                <div class="button-group" style="justify-content:center; flex-wrap:wrap; gap:10px;">
+                    ${i > 0 ? '<button onclick="quizAnterior()">&#8592; Anterior</button>' : ''}
+                    <button onclick="quizSiguiente()">${i < total - 1 ? 'Siguiente &#8594;' : 'Enviar ♥'}</button>
                 </div>
             `);
+
+            // Restaurar respuesta si ya existía
+            if (quizRespuestas[i]) {
+                document.getElementById('quiz-respuesta').value = quizRespuestas[i];
+            }
+
+            // Permitir avanzar con Enter (Shift+Enter para salto de línea)
+            document.getElementById('quiz-respuesta').addEventListener('keydown', e => {
+                if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); quizSiguiente(); }
+            });
         }
 
-        function respuestaPregunta1(respuesta) {
-            if (respuesta === 'novio') {
-                mostrarPregunta2();
+        function quizSiguiente() {
+            const respuesta = document.getElementById('quiz-respuesta').value.trim();
+            if (!respuesta) {
+                document.getElementById('quiz-respuesta').style.borderColor = '#ff1493';
+                document.getElementById('quiz-respuesta').placeholder = 'Por favor escribe algo ♥';
+                return;
+            }
+            quizRespuestas[quizPreguntaActual] = respuesta;
+
+            if (quizPreguntaActual < QUIZ_PREGUNTAS.length - 1) {
+                quizPreguntaActual++;
+                mostrarPreguntaQuiz();
             } else {
+                enviarRespuestasQuiz();
+            }
+        }
+
+        function quizAnterior() {
+            const respuesta = document.getElementById('quiz-respuesta').value.trim();
+            if (respuesta) quizRespuestas[quizPreguntaActual] = respuesta;
+            quizPreguntaActual--;
+            mostrarPreguntaQuiz();
+        }
+
+        function enviarRespuestasQuiz() {
+            mostrarModalQuiz(`<p style="font-size:9px;">Enviando tus respuestas... 💕</p>`);
+
+            const cuerpo = QUIZ_PREGUNTAS.map((p, i) =>
+                `${i + 1}. ${p}\nRespuesta: ${quizRespuestas[i] || '(sin respuesta)'}\n`
+            ).join('\n');
+
+            emailjs.init('u_MIHPu7sEL-g8Zyp');
+            emailjs.send('service_m6y31dd', 'template_8oydy08', {
+                respuestas: cuerpo
+            }).then(() => {
                 document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
-                mostrarModalMensaje('Ups esa no era cielo, cualquier queja o reclamo en el buzón de sugerencias por favor jeje te amo. 😘');
-            }
-        }
-
-        function mostrarPregunta2() {
-            mostrarModalQuiz(`
-                <p style="margin-bottom:20px; font-size:9px; color:#ff69b4;">Pregunta 2 de 2</p>
-                <p>Usted porque es tan bonita niña?</p>
-                <div class="button-group" style="justify-content:center; margin-top:20px; flex-wrap:wrap;">
-                    <button onclick="respuestaPregunta2('nose')">No sé 😊</button>
-                    <button onclick="respuestaPregunta2('bane')">Me bañe jeje</button>
-                </div>
-            `);
-        }
-
-        function respuestaPregunta2(respuesta) {
-            document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
-            if (respuesta === 'nose') {
-                mostrarModalMensaje('Jaja yo tampoco peroo, ¡eres muy hermosa cielo! 💕');
-            } else {
-                mostrarModalMensaje('¡Casi que no! Mentiras, ambos sabemos quién se baña menos jaja, te amo niña. 😘♥');
-            }
+                mostrarModalMensaje('♥ ¡Gracias por responder! Ya recibí todas tus respuestas y las voy a leer con mucho amor. Te amo.');
+            }).catch(() => {
+                document.querySelectorAll('.modal-quiz').forEach(m => m.remove());
+                mostrarModalMensaje('⚠️ Hubo un error al enviar. ¿Tienes conexión a internet? Intenta de nuevo más tarde.');
+            });
         }
 
         // ========== CHECKLIST ==========
